@@ -43,7 +43,7 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
-    public static final String HTTP_RESULT = "com.zhibi.doushuextract.config.configGlobalResponse.HttpResult";
+    public static final String HTTP_RESULT = "com.zhibi.doushuextract.config.resp.HttpResult";
     @Autowired
     HttpServletRequest httpServletRequest;
 
