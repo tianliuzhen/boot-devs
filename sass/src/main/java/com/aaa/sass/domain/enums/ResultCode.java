@@ -17,6 +17,8 @@ public enum ResultCode {
     MISSING_PARAM(5503,"缺少参数"),
 
     UNSUPPORTED_METHOD(5504,"不支持的请求类型"),
+
+    INVALID_TOKEN(5505,"token无效！"),
     ;
 
     private int code;

@@ -5,7 +5,11 @@ package com.aaa.sass.config;
  * @version 1.0 TokenInterceptor.java  2020/7/30 21:22
  */
 
+import com.aaa.sass.config.configGlobalResponse.DemoException;
+import com.aaa.sass.config.configGlobalResponse.Shift;
+import com.aaa.sass.domain.enums.ResultCode;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SignatureException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -34,7 +38,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             token = request.getParameter(jwtConfig.getHeader());
         }
         if(StringUtils.isEmpty(token)){
-            throw new SignatureException(jwtConfig.getHeader()+ "不能为空");
+            throw new SignatureException(jwtConfig.getHeader() +" 不能为空");
+            // Shift.fatal(ResultCode.SYSTEM_ERROR);
         }
 
         Claims claims = null;

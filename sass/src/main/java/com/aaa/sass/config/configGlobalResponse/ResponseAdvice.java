@@ -13,6 +13,8 @@ package com.aaa.sass.config.configGlobalResponse;
 
 import com.aaa.sass.domain.enums.ResultCode;
 import com.alibaba.fastjson.JSON;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -61,7 +63,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> aClass) {
         final String returnName = returnType.getParameterType().getName();
 
-        return !"com.aaa.mybatisplus.config.configGlobalResponse.HttpResult".equals(returnName)
+        return !"com.aaa.sass.config.configGlobalResponse.HttpResult".equals(returnName)
                 && !"org.springframework.http.ResponseEntity".equals(returnName);
     }
 
@@ -91,7 +93,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
 
 
 
-/**
+   /**
      * 异常日志记录
      */
 
@@ -101,7 +103,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
 
-/**
+   /**
      * 参数未通过@Valid验证异常，
      */
 
@@ -113,7 +115,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
 
-/**
+   /**
      * 参数格式有误
      */
 
@@ -137,7 +139,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
 
-/**
+   /**
      * 不支持的请求类型
      */
 
@@ -149,7 +151,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
 
-       /**
+    /**
      * 业务层异常
      */
 
@@ -160,5 +162,14 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
         return HttpResult.fail(exception.getErrorCode(), exception.getErrorMsg());
     }
 
+    /**
+     * token 不能为空
+     */
+    @ExceptionHandler(SignatureException.class)
+    @ResponseBody
+    private HttpResult SignatureExceptionHandler(SignatureException exception) {
+        logErrorRequest(exception);
+        return HttpResult.fail(ResultCode.INVALID_TOKEN.getCode(),exception.getMessage());
+    }
 }
 
