@@ -15,3 +15,4 @@ config:
       - /swagger-resources/**
       - /doc.html
       - /v2/api-docs
+      - /webjars/**
