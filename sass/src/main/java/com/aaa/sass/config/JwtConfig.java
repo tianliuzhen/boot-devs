@@ -11,7 +11,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 注意：JWT的token，区分大小写
@@ -27,6 +30,7 @@ public class JwtConfig {
     private String secret;
     private long expire;
     private String header;
+    private List<String> ignoreUrls = new ArrayList<>();
 
     /**
      * 生成token

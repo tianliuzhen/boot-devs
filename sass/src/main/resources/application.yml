@@ -1,7 +1,7 @@
 server:
   port: 8010
-  servlet:
-    context-path: /v1
+#  servlet:
+#    context-path: /v1
 spring:
   application:
     name: sass
@@ -10,4 +10,8 @@ config:
     secret: abcdefg1234567  # 加密密钥
     expire: 3600  # token有效时长
     header: token  # header 名称
-
+    ignore-urls:
+      - /error
+      - /swagger-resources/**
+      - /doc.html
+      - /v2/api-docs

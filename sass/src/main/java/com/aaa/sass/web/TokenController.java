@@ -40,11 +40,11 @@ public class TokenController {
         // 这里模拟通过用户名和密码，从数据库查询userId
         // 这里把userId转为String类型，实际开发中如果subject需要存userId，则可以JwtConfig的createToken方法的参数设置为Long类型
         String userId = 1001 + "";
-        String token ="" ;
+        String token =jwtConfig.createToken(userId) ;
         if (!StringUtils.isEmpty(token)) {
             json.put("token",token) ;
         }
-        return new ResultResp("json");
+        return new ResultResp(token);
     }
 
     /**

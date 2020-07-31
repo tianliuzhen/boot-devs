@@ -14,9 +14,13 @@ import javax.annotation.Resource;
 public class WebConfig implements WebMvcConfigurer {
     @Resource
     private TokenInterceptor tokenInterceptor ;
+    @Resource
+    private JwtConfig jwtConfig;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tokenInterceptor).addPathPatterns("/v1/**");
+        registry.addInterceptor(tokenInterceptor).
+                excludePathPatterns(jwtConfig.getIgnoreUrls())
+        .addPathPatterns();
     }
 }
