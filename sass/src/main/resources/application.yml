@@ -1,7 +1,7 @@
 server:
   port: 8010
-#  servlet:
-#    context-path: /v1
+  servlet:
+    context-path: /v1
 spring:
   application:
     name: sass

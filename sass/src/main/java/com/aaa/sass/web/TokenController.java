@@ -6,8 +6,6 @@ package com.aaa.sass.web;
  */
 
 import com.aaa.sass.config.JwtConfig;
-import com.aaa.sass.domain.base.ResultResp;
-import com.aaa.sass.domain.base.HttpResult;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.util.StringUtils;
@@ -31,7 +29,7 @@ public class TokenController {
      * @return
      */
     @PostMapping("/login")
-    public ResultResp<?> login (@RequestParam("userName") String userName,
+    public String login (@RequestParam("userName") String userName,
                               @RequestParam("passWord") String passWord) throws JSONException {
         JSONObject json = new JSONObject();
 
@@ -44,15 +42,15 @@ public class TokenController {
         if (!StringUtils.isEmpty(token)) {
             json.put("token",token) ;
         }
-        return new ResultResp(token);
+        return token;
     }
 
     /**
      * 需要 Token 验证的接口
      */
     @PostMapping("/info")
-    public ResultResp<?> info (){
-        return HttpResult.success("info") ;
+    public String info (){
+        return "info" ;
     }
 
     /**
@@ -61,9 +59,9 @@ public class TokenController {
      * @return
      */
     @GetMapping("/getUserInfo")
-    public ResultResp<?> getUserInfo(HttpServletRequest request){
+    public String getUserInfo(HttpServletRequest request){
         String usernameFromToken = jwtConfig.getUsernameFromToken(request.getHeader("token"));
-        return HttpResult.success(usernameFromToken) ;
+        return usernameFromToken;
     }
 
     /*
