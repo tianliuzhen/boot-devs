@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct;
  */
 @Component
 @Slf4j
-public class MsgConfirmAndReturn implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback {
+public class MqMsgConfirmAndReturn implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 

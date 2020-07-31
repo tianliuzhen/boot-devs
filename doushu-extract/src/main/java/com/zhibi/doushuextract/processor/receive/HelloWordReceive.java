@@ -34,17 +34,12 @@ public class HelloWordReceive {
                     log.info("MqReceiver 确认消费");
                     /**
                      * 手动确认消息接收
-                     * 如果不加下面这句话是默认是不确认，
-                     * 即这里只会读取队列里的消息但是不会删除，采用手动应答模式, 手动确认应答更为安全稳定
                      */
                     channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
                     // int i=1/0;  // 模拟异常 ，可通过 channel.basicNack 进行返现回滚到队列，防止误删
                 } catch (Exception e) {
                     /**
-                     *  最后一个参数requeue一般都会为true，此次没调用到数据，把这个消息返回到队列中再消费，
-                     *  如果代码中出现了int i=1/0,那么还是会造成死循环。
-                     *  给Queue绑定死信队列，使用nack（requque为false）确认消息消费失败
-                     *  个人建议这里还是，通过数据库记录，没必要再次放在队列，重复消费浪费资源
+                     *  出现异常回滚到队列避免，丢失
                      */
                     // channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
                 }
