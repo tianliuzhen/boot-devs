@@ -1,5 +1,6 @@
 package com.zhibi.doushuextract;
 
+import com.alibaba.fastjson.JSON;
 import com.zhibi.doushuextract.dao.MongoHelloWordDao;
 import com.zhibi.doushuextract.domain.entity.MongoEntity;
 import com.zhibi.doushuextract.repository.HelloWordRepository;
@@ -9,11 +10,16 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.LookupOperation;
+import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -42,8 +48,43 @@ public class MongoDbQueryTest {
     @Test
     public void getPageList(){
         mongoHelloWordService.getListByPage();
+
+
     }
 
+    @Test
+    public void getListJoin() {
+        // LookupOperation lookupToLots = LookupOperation.newLookup().
+        //         from("MongoV2Entity").//关联表名 lots
+        //         localField("_id").//关联字段
+        //         foreignField("_id").//主表关联字段对应的次表字段
+        //         as("groups");//查询结果集合名
+        //
+        // //主表
+        // AggregationOperation match = Aggregation.match(new Criteria());
+        // //次表
+        // AggregationOperation match1 = Aggregation.match(new Criteria());
+        //
+        // UnwindOperation unwind = Aggregation.unwind("groups");
+        // Aggregation aggregation = Aggregation.newAggregation(match, match1, lookupToLots, unwind);
+        //
+        // mongoTemplate.aggregate(aggregation, "groupsEntity", GroupsEntity.class).getMappedResults();
+    }
+
+    @Test
+    public void twoTableQuery() {
+        LookupOperation lookupOperation=LookupOperation.newLookup().
+                from("mongoV2Entity").  //关联从表名
+                localField("id").     //主表关联字段
+                foreignField("id").//从表关联的字段
+                as("result");   //查询结果名
+        AggregationOperation match = Aggregation.match(new Criteria());
+        Aggregation aggregation=Aggregation.newAggregation(match, lookupOperation); //多条件
+        // UnwindOperation unwind = Aggregation.unwind("result");
+        List<Map> results = mongoTemplate.aggregate(aggregation,"mongoEntity", Map.class).getMappedResults();
+        //上面的mongoEntity必须是查询的主表名
+        System.out.println(results.toString());
+    }
 
     /**
      * 注意: 这里不区分大小写
