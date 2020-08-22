@@ -24,13 +24,13 @@ public class UserWeChatController {
 
     /**
      * 接口解密
-     *
      * @param decryptSpec
      * @return
      */
     @PostMapping(value = "/decrypt")
-    public void decrypt(@RequestBody DecryptSpec decryptSpec) {
+    public ApiResult decrypt(@RequestBody DecryptSpec decryptSpec) {
         weChatService.decrypt(decryptSpec);
+        return null;
     }
 
 }
