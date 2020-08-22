@@ -11,18 +11,20 @@ import feign.RequestLine;
  */
 public interface TestApi {
 
-
+    /**
+     * 无参
+     */
     @RequestLine("GET /user/objectResponseDate")
      Object response();
-
-
-    @RequestLine("GET /user/findById?id={id}")
-    Object findById(@Param("id") int id );
+    /**
+     * 表单传参
+     */
+    @RequestLine("GET /user/findById?id={idss}")
+    String findById(@Param("idss") int id );
 
 
     /**
-     * 如果 ss.equals("1")那么抛出异常
-     *
+     * 传 json
      * @param city
      * @return
      */

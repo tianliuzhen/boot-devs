@@ -4,7 +4,9 @@ import com.aaa.wechat.api.TestApi;
 import com.aaa.wechat.domain.City;
 import com.aaa.wechat.service.WeChatService;
 import feign.Feign;
+import feign.Request;
 import feign.Retryer;
+import feign.codec.StringDecoder;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import jdk.nashorn.internal.runtime.options.Options;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author liuzhen.tian
@@ -50,7 +53,9 @@ public class WeChatTest {
     @Test
     public void testFindById() {
         TestApi action = Feign.builder()
-                .decoder(new JacksonDecoder())
+                .decoder(new StringDecoder())
+                .options(new Request.Options(10L, TimeUnit.SECONDS, 60L, TimeUnit.SECONDS, true))
+                .retryer(new Retryer.Default(5000, 5000, 3))
                 .target(TestApi.class,
                         "http://localhost:8070/"
                 );
