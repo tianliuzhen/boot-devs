@@ -40,16 +40,19 @@
             <version>1.4.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-jackson -->
         <dependency>
             <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
-            <version>9.7.0</version>
+            <artifactId>feign-jackson</artifactId>
+            <version>11.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-jackson -->
         <dependency>
             <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-gson</artifactId>
-            <version>9.7.0</version>
+            <artifactId>feign-jackson</artifactId>
+            <version>11.0</version>
         </dependency>
+
 
         <dependency>
             <groupId>com.alibaba</groupId>

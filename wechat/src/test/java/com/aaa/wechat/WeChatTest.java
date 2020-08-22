@@ -1,20 +1,19 @@
 package com.aaa.wechat;
 
 import com.aaa.wechat.api.TestApi;
-import com.aaa.wechat.domain.DecryptSpec;
+import com.aaa.wechat.domain.City;
 import com.aaa.wechat.service.WeChatService;
-import com.alibaba.fastjson.JSON;
 import feign.Feign;
-import feign.codec.StringDecoder;
-import feign.gson.GsonDecoder;
+import feign.Retryer;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
+import jdk.nashorn.internal.runtime.options.Options;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author liuzhen.tian
@@ -33,8 +32,14 @@ public class WeChatTest {
     }
     @Test
     public void testResponse() {
+
+        // options方法指定连接超时时长及响应超时时长，
+        // retryer方法指定重试策略
+        // target方法绑定接口与服务端地址。返回类型为绑定的接口类型。
+
         TestApi action = Feign.builder()
-               .decoder(new GsonDecoder())
+               // 解码
+               .decoder(new JacksonDecoder())
                //  .decoder(new StringDecoder())
                 .target(TestApi.class,
                         "http://localhost:8070/"
@@ -45,8 +50,7 @@ public class WeChatTest {
     @Test
     public void testFindById() {
         TestApi action = Feign.builder()
-                .decoder(new GsonDecoder())
-                //  .decoder(new StringDecoder())
+                .decoder(new JacksonDecoder())
                 .target(TestApi.class,
                         "http://localhost:8070/"
                 );
@@ -56,14 +60,14 @@ public class WeChatTest {
     @Test
     public void testFindByMap() {
         TestApi action = Feign.builder()
-                .decoder(new GsonDecoder())
-                //  .decoder(new StringDecoder())
+                .encoder(new JacksonEncoder())
+                // 解码编码都是 Jackson  ，springMvc （@RequestBody、@ResponseBody）才能解析
+                .decoder(new JacksonDecoder())
                 .target(TestApi.class,
                         "http://localhost:8070/"
                 );
-        Map map = new HashMap();
-        map.put("name", "123");
-        Object response = action.findByMap(JSON.toJSONString(map));
+
+        Object response = action.findByMap(new City("hz",123));
         System.out.println(response);
     }
 }
