@@ -4,3 +4,14 @@ wechat:
   secret: 28b39c405e082d8dbb9c85704d3399e1
   grant_type: authorization_code
 
+user:
+  server:
+    url: http://127.0.0.1:8070
+
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
