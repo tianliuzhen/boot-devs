@@ -6,9 +6,11 @@ import com.zhibi.doushuextract.service.MongoHelloWordService;
 import com.zhibi.doushuextract.util.MongoUtil;
 import com.zhibi.doushuextract.util.PageUtils;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.BulkOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -59,6 +61,30 @@ public class MongoHelloWordServiceImpl implements MongoHelloWordService {
         return null;
     }
 
+    @Override
+    public void insertByList() {
+        //这里的BulkMode.UNORDERED是个枚举，，，collectionName是mongo的集合名
+        BulkOperations ops = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED,  MongoEntity.class);
 
+        for (int i = 0; i < 10; i++) {
+            //注意此处的obj必须是一个DBObject，可以是json对象也可以的bson对象，entity没有试过
+            MongoEntity cat = MongoEntity.builder().id((long) i).name("cat").age(11).sex(1).build();
+            ops.insert(cat);
+        }
 
+        //循环插完以后批量执行提交一下ok！
+        ops.execute();
+    }
+
+    @Override
+    public void updateByList() {
+        BulkOperations ops = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, MongoEntity.class);
+
+        for (int i = 10; i < 20; i++) {
+            Update update = new Update();
+            update.set("age", "new:"+i);
+            ops.updateOne(new Query(Criteria.where("id").is(i)), update);
+        }
+        ops.execute();
+    }
 }

@@ -29,4 +29,14 @@ public interface MongoHelloWordService {
      * @return
      */
     List<MongoEntity> getListByKeyWord();
+
+    /**
+     * 批量插入
+     */
+    void insertByList();
+
+    /**
+     * 批量修改
+     */
+    void updateByList();
 }
