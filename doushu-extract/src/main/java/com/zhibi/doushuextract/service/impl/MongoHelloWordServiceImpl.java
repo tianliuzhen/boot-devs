@@ -1,5 +1,6 @@
 package com.zhibi.doushuextract.service.impl;
 
+import com.google.common.collect.Lists;
 import com.zhibi.doushuextract.domain.entity.MongoEntity;
 import com.zhibi.doushuextract.repository.HelloWordRepository;
 import com.zhibi.doushuextract.service.MongoHelloWordService;
@@ -11,6 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -76,15 +78,22 @@ public class MongoHelloWordServiceImpl implements MongoHelloWordService {
         ops.execute();
     }
 
+
+
     @Override
     public void updateByList() {
-        BulkOperations ops = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, MongoEntity.class);
 
-        for (int i = 10; i < 20; i++) {
+        //BulkMode.UNORDERED:表示并行处理，遇到错误时能继续执行不影响其他操作；
+        // BulkMode.ORDERED：表示顺序执行，遇到错误时会停止所有执行
+        BulkOperations ops = mongoTemplate.bulkOps(BulkOperations.BulkMode.UNORDERED, MongoEntity.class);
+        List<Pair<Query, Update>> updateList = Lists.newArrayList();
+        for (int i = 10; i < 1000; i++) {
             Update update = new Update();
-            update.set("age", "new:"+i);
-            ops.updateOne(new Query(Criteria.where("id").is(i)), update);
+            update.set("age", "new :"+i);
+            Query query = new Query(Criteria.where("id").is(i));
+            updateList.add(Pair.of(query, update));
         }
+        ops.updateOne(updateList);
         ops.execute();
     }
 }
