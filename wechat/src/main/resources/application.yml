@@ -1,8 +1,24 @@
 
 wechat:
-  appid: wx555718c1f45c12b8
-  secret: 28b39c405e082d8dbb9c85704d3399e1
+  appid: xxxxxxx
+  secret: yyyyyyy
   grant_type: authorization_code
+
+
+wx:
+  pay:
+    #精选小程序
+    jx:
+      #微信公众号或者小程序等的appid
+      appId: xxxxxxx
+      #微信支付商户号
+      mchId: yyyyyyy
+      #微信支付商户密钥
+      mchKey: zzzzzzz
+      subAppId: #服务商模式下的子商户公众账号ID
+      subMchId: #服务商模式下的子商户号
+      # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+      keyPath: classpath:apiclient_cert.p12
 
 user:
   server:
