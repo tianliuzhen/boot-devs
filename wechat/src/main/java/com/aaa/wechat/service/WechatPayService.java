@@ -24,4 +24,7 @@ public interface WechatPayService {
      * @param refundFee 需要申请的退款金额 单位为分
      */
     void refund(String outTradeNo, String outRefundNo, Integer totalFee, Integer refundFee);
+
+
+
 }

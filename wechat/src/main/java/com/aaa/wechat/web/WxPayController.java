@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 
 /**
@@ -25,7 +26,7 @@ public class WxPayController {
 
 
     @PostMapping("/pay")
-    public void createPay(){
+    public void createPay(HttpServletRequest request){
 
         /**
          * @param body 商品描述
@@ -38,15 +39,25 @@ public class WxPayController {
                 "商户订单号",
                 CommonUtils.convertBigDecimalToInteger(BigDecimal.valueOf(128.12)),
                 "用户的唯一标识一般是  openid",
-                "127.0.0.1");
+                CommonUtils.getIpAddr(request));
 
     }
     @PostMapping("/refund")
     public void createRefund(){
 
+
+        /**
+         *
+         * 申请退款之前需要先查询订单，拿到
+         * 微信订单号 transaction_id  或者  out_trade_no
+         *
+         * transaction_id、out_trade_no二选一，如果同时存在优先级：transaction_id> out_trade_no
+         * transaction_id 是在回调的接口中 拿到的
+         */
+
         /**
          * 微信退款接口
-         * @param outTradeNo 商户订单号 order 的 code
+         * @param outTradeNo 商户订单号  （这个商户也是我们自己后台生成的）
          * @param outRefundNo 售后code
          * @param totalFee 订单总金额 单位为分
          * @param refundFee 需要申请的退款金额 单位为分

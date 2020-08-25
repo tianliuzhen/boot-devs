@@ -32,8 +32,10 @@ public class WxNotifyServiceImpl implements WxNotifyService {
         try {
             notifyResult = jxWxService.parseOrderNotifyResult(xmlData);
 
-            //本地后台生成的订单号
+            //我们本地后台生成的订单号
             String outTradeNo = notifyResult.getOutTradeNo().split("_")[0];
+            //微信提供的交易号 =》 微信支付订单号
+            String transactionId = notifyResult.getTransactionId();
             //付款时间
             String timeEnd = notifyResult.getTimeEnd();
             //订单金额 分 为单位
