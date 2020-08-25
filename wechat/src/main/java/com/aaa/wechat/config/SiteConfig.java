@@ -30,4 +30,7 @@ public class SiteConfig {
     @Value("${wechat.grant_type}")
     private String grantType;
 
+    @Value("${wx.wxNotifyUrl.notify}")
+    private String wxRefundNotifyUrl;
+
 }

@@ -38,6 +38,10 @@ public class WxNotifyServiceImpl implements WxNotifyService {
             String timeEnd = notifyResult.getTimeEnd();
             //订单金额 分 为单位
             Integer totalFee = notifyResult.getTotalFee();
+            /**
+             * 这里可以逻辑
+             * 及幂等配置
+             */
 
 
         } catch (WxPayException e) {
