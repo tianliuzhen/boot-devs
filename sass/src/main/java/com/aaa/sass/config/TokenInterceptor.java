@@ -35,8 +35,10 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         */
         NonLogin nonLoginAnnotation;
         if (handler instanceof HandlerMethod) {
+            //检测类注解
             nonLoginAnnotation = ((HandlerMethod) handler).getBeanType().getAnnotation(NonLogin.class);
             if (nonLoginAnnotation == null) {
+                //检测方法注解
                 nonLoginAnnotation = ((HandlerMethod) handler).getMethodAnnotation(NonLogin.class);
             }
         } else {
@@ -53,14 +55,13 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         if(StringUtils.isEmpty(token)){
             token = request.getParameter(jwtConfig.getHeader());
         }
-        if(StringUtils.isEmpty(token)){
-            throw new SignatureException(jwtConfig.getHeader() +" 不能为空");
-            // Shift.fatal(ResultCode.SYSTEM_ERROR);
-        }
         Claims claims = null;
         if (nonLoginAnnotation == null) {
+            if(StringUtils.isEmpty(token)){
+                throw new SignatureException(jwtConfig.getHeader() +" 不能为空");
+                // Shift.fatal(ResultCode.SYSTEM_ERROR);
+            }
             try {
-
                 claims = jwtConfig.getTokenClaim(token);
                 if (claims == null || jwtConfig.isTokenExpired(claims.getExpiration())) {
                     throw new SignatureException(jwtConfig.getHeader() + "失效，请重新登录。");
@@ -68,11 +69,13 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             } catch (Exception e) {
                 throw new SignatureException(jwtConfig.getHeader() + "失效，请重新登录。");
             }
+            /** 设置 identityId 用户身份ID */
+            request.setAttribute("identityId", claims.getSubject());
         }else {
             // 无需操作登录token的一些操作
         }
-        /** 设置 identityId 用户身份ID */
-        request.setAttribute("identityId", claims.getSubject());
+
+
         return true;
     }
 }
