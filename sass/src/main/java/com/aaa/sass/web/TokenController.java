@@ -5,6 +5,7 @@ package com.aaa.sass.web;
  * @version 1.0 TokenController.java  2020/7/30 21:24
  */
 
+import com.aaa.sass.annotation.NonLogin;
 import com.aaa.sass.config.JwtConfig;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -50,6 +51,15 @@ public class TokenController {
      */
     @PostMapping("/info")
     public String info (){
+        return "info" ;
+    }
+
+    /**
+     * 不需要 Token 验证的接口
+     */
+    @NonLogin
+    @PostMapping("/logNoneInfo")
+    public String LogNoneInfo (){
         return "info" ;
     }
 
