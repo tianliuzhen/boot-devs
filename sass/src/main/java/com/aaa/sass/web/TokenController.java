@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @RestController
 public class TokenController {
@@ -72,6 +73,20 @@ public class TokenController {
     public String getUserInfo(HttpServletRequest request){
         String usernameFromToken = jwtConfig.getUsernameFromToken(request.getHeader("token"));
         return usernameFromToken;
+    }
+
+    /**
+     * 根据请求头的token获取userId
+     * @param request
+     * @return
+     */
+    @GetMapping("/getUserInfoTokenExpire")
+    public Date getUserInfoTokenExpire(HttpServletRequest request){
+        Date startTime = jwtConfig.getIssuedAtDateFromToken(request.getHeader("token"));
+        Date expireTime = jwtConfig.getExpirationDateFromToken(request.getHeader("token"));
+
+
+        return expireTime;
     }
 
     /*
