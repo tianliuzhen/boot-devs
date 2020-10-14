@@ -30,6 +30,19 @@ public class WeChatServiceImpl implements WeChatService {
     @Autowired
     private SiteConfig siteConfig;
 
+    @Override
+    public String getToken(String jCode) {
+        WechatSdkApi wechatSdkApi = Feign.builder()
+                .decoder(new StringDecoder())
+                .target(WechatSdkApi.class, ApiConstants.WECHAT_GET_OPENID);
+        String wechatOpen = wechatSdkApi.findById(siteConfig.getAppid(), siteConfig.getSecret(), jCode, siteConfig.getGrantType());
+        WechatResponse wechatResponse = JSON.parseObject(wechatOpen, WechatResponse.class);
+        String openid = wechatResponse.getOpenid();
+        /**
+         * 每次登陆，即是 先根据 openid 查找数据库 user 表是否存在，若不存在即是新用户，录入新用户即可。
+         */
+        return null;
+    }
 
     @Override
     public String decrypt(DecryptSpec decryptSpec) {
@@ -50,6 +63,8 @@ public class WeChatServiceImpl implements WeChatService {
         }
         return result;
     }
+
+
 
       /*  String sessionKey = "tiihtNczf5v6AKRyjwEUhQ==";
         String encryptedData =

@@ -14,4 +14,11 @@ public interface WeChatService {
      * @return
      */
     String decrypt(DecryptSpec decryptSpec);
+
+    /**
+     * 注意：这里的 code 需要打断点获取，是未使用的code，
+     *      一次code 只能使用一次
+     * jcode 获取token
+     */
+    String getToken(String jCode);
 }
