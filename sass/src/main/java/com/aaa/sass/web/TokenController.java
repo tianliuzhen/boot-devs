@@ -7,13 +7,15 @@ package com.aaa.sass.web;
 
 import com.aaa.sass.annotation.NonLogin;
 import com.aaa.sass.config.JwtConfig;
+import com.aaa.sass.domain.User;
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -84,9 +86,19 @@ public class TokenController {
     public Date getUserInfoTokenExpire(HttpServletRequest request){
         Date startTime = jwtConfig.getIssuedAtDateFromToken(request.getHeader("token"));
         Date expireTime = jwtConfig.getExpirationDateFromToken(request.getHeader("token"));
-
-
         return expireTime;
+    }
+    @NonLogin
+    @PostMapping("/getUser")
+    public User getUser(User user) {
+        String s = JSON.toJSONString(user);
+        User res = JSON.parseObject(s, User.class);
+        return res;
+    }
+    @NonLogin
+    @PostMapping("/getDate")
+    public  Date getDate() {
+        return new Date();
     }
 
     /*
