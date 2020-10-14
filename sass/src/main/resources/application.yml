@@ -5,6 +5,14 @@ server:
 spring:
   application:
     name: sass
+  # jackson时间格式化
+  jackson:
+#   返回序列化时间戳
+#   serialization:
+#   write-dates-as-timestamps: true
+#   返回序列化指定格式
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
 config:
   jwt:
     secret: abcdefg1234567  # 加密密钥
