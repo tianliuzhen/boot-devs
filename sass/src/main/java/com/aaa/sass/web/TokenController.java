@@ -90,7 +90,7 @@ public class TokenController {
     }
     @NonLogin
     @PostMapping("/getUser")
-    public User getUser(User user) {
+    public User getUser(@RequestBody User user) {
         String s = JSON.toJSONString(user);
         User res = JSON.parseObject(s, User.class);
         return res;
