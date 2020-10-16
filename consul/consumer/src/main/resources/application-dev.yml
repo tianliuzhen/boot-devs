@@ -1,0 +1,13 @@
+user:
+  description: 用户信息描述
+
+---
+user:
+  student:
+    name: allen
+    age: 23
+  teacher:
+    name: teacher wang
+    course: 计算机网络与技术
+
+
