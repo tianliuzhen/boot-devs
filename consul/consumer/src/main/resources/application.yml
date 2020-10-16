@@ -1,0 +1,8 @@
+management:
+#  默认，actuator endpoint通过JMX被暴露，而通过HTTP暴露的只有health和info。
+#  以下是你可以通过应用的properties可以通过HTTP和JMX暴露的actuator endpoint。
+#  参考：https://blog.csdn.net/sinat_23324343/article/details/89187763
+  endpoints:
+    web:
+      exposure:
+        include: '*'
