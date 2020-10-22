@@ -59,11 +59,27 @@ public class WeChatTest {
                 .options(new Request.Options(10L, TimeUnit.SECONDS, 60L, TimeUnit.SECONDS, true))
                 .retryer(new Retryer.Default(5000, 5000, 3))
                 .target(TestApi.class,
-                        "http://localhost:8070/"
+                        "http://localhost:8070/api/"
                 );
         Object response = action.findById(1);
         System.out.println(response);
     }
+
+    @Test
+    public void testFindByIdV2() {
+        TestApi action = Feign.builder()
+                .decoder(new StringDecoder())
+                .options(new Request.Options(10L, TimeUnit.SECONDS, 60L, TimeUnit.SECONDS, true))
+                .retryer(new Retryer.Default(5000, 5000, 3))
+                .target(TestApi.class,
+                        "http://localhost:8070/api/"
+                );
+        Map<String, Integer> queryMap = Maps.newHashMap();
+        queryMap.put("id", 4);
+        Object response = action.findByIdV2(queryMap);
+        System.out.println(response);
+    }
+
     @Test
     public void testFindByMap() {
         TestApi action = Feign.builder()

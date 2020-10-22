@@ -1,10 +1,7 @@
 package com.aaa.wechat.api;
 
 import com.aaa.wechat.domain.City;
-import feign.HeaderMap;
-import feign.Headers;
-import feign.Param;
-import feign.RequestLine;
+import feign.*;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.net.URI;
@@ -27,6 +24,12 @@ public interface TestApi {
     @RequestLine("GET /user/findById?id={idss}")
     String findById(@Param("idss") int id );
 
+
+    /**
+     * 表单传参V2
+     */
+    @RequestLine("GET /user/findById")
+    String findByIdV2(@QueryMap Map<String, Integer> queryMap);
 
     /**
      * 传 json
