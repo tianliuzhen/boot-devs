@@ -3,6 +3,8 @@ package com.aaa.wechat;
 import com.aaa.wechat.api.TestApi;
 import com.aaa.wechat.domain.City;
 import com.aaa.wechat.service.WeChatService;
+import com.google.common.collect.Maps;
+import com.sun.jndi.toolkit.url.Uri;
 import feign.Feign;
 import feign.Request;
 import feign.Retryer;
@@ -13,9 +15,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 原生Feign使用详解 :https://www.jianshu.com/p/89a73e0f05c0
  * @author liuzhen.tian
  * @version 1.0 WeChatTest.java  2020/8/22 16:21
  */
@@ -69,6 +75,21 @@ public class WeChatTest {
                 );
 
         Object response = action.findByMap(new City("hz",123));
+        System.out.println(response);
+    }
+
+    @Test
+    public void testFindByMapV2() throws URISyntaxException {
+        TestApi action = Feign.builder()
+                .encoder(new JacksonEncoder())
+                // 解码编码都是 Jackson  ，springMvc （@RequestBody、@ResponseBody）才能解析
+                .decoder(new JacksonDecoder())
+                .target(TestApi.class,
+                        "http://localhost:8070/"
+                );
+        Map<String, String> headerMap = Maps.newHashMap();
+        headerMap.put("token", "123");
+        Object response = action.findByMapV2(new URI("http://localhost:8070/api/user/findByMap"),headerMap,new City("hz",123));
         System.out.println(response);
     }
 }
