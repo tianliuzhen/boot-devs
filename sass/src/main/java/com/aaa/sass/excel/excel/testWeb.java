@@ -3,6 +3,7 @@ package com.aaa.sass.excel.excel;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.result.ExcelImportResult;
+import com.aaa.sass.annotation.NonLogin;
 import com.google.common.collect.Lists;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +25,7 @@ import java.util.Map;
  * @date 2019/12/12
  */
 @RestController
+@NonLogin
 public class testWeb {
 
     /**
@@ -47,7 +51,9 @@ public class testWeb {
             if(!list.isEmpty()){
                 workbook = ExcelExportUtil.exportBigExcel(exportParams, FullDataExportDTO.class, list);
                 ExcelExportUtil.closeExportBigExcel();
+                response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode("交易信息统计.xlsx", String.valueOf(StandardCharsets.UTF_8)));
                 EasyPoiUtils.download(workbook, response);
+
             }
         } catch (IOException e) {
             e.printStackTrace();

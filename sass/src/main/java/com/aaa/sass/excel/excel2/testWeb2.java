@@ -6,6 +6,7 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.afterturn.easypoi.excel.entity.result.ExcelImportResult;
+import com.aaa.sass.annotation.NonLogin;
 import com.aaa.sass.excel.excel.EasyPoiUtils;
 import com.aaa.sass.excel.excel.FullDataExportDTO;
 import com.alibaba.fastjson.JSONArray;
@@ -29,6 +30,7 @@ import java.util.Map;
  * @date 2019/12/12
  */
 @RestController
+@NonLogin
 public class testWeb2 {
     /**
      * 多sheet 测试导入
