@@ -1,9 +1,11 @@
 package com.aaa.wechat.api;
 
 import com.aaa.wechat.domain.City;
-import feign.Headers;
-import feign.Param;
-import feign.RequestLine;
+import feign.*;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.net.URI;
+import java.util.Map;
 
 /**
  * @author liuzhen.tian
@@ -24,6 +26,12 @@ public interface TestApi {
 
 
     /**
+     * 表单传参V2
+     */
+    @RequestLine("GET /user/findById")
+    String findByIdV2(@QueryMap Map<String, Integer> queryMap);
+
+    /**
      * 传 json
      * @param city
      * @return
@@ -31,6 +39,10 @@ public interface TestApi {
     @RequestLine("POST /user/findByMap")
     @Headers({"Content-Type: application/json","Accept: application/json"})
     Object findByMap(City city);
+
+    @RequestLine("POST")
+    @Headers({"Content-Type: application/json","Accept: application/json"})
+    Object findByMapV2(URI baseUri, @HeaderMap Map<String,String> headerMap, @RequestBody City city) ;
 
 
 }
