@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 /**
+ * 这种配置无法，无法实时刷新 新修改的cron 配置
  * @author liuzhen.tian
  * @version 1.0 ElasticsearchSchedultaskController.java  2020/12/10 17:59
  */
-// @Component
-public class ScheduleJob implements SchedulingConfigurer {
+@Component
+public class MyScheduledSimleTask implements SchedulingConfigurer {
 
 
     @Override

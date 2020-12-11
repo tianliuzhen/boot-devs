@@ -1,6 +1,8 @@
 package com.aaa.schedule.task;
 
 import com.aaa.schedule.domain.TaskEntity;
+import com.aaa.schedule.service.TaskSolverChooser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.CronTask;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
@@ -20,12 +22,15 @@ import java.util.concurrent.ScheduledFuture;
  * @version 1.0 ScheduledTask.java  2020/12/11 9:58
  */
 @Component
-public class ScheduledTask implements SchedulingConfigurer {
+public class MyScheduledTask implements SchedulingConfigurer {
 
     private volatile ScheduledTaskRegistrar registrar;
 
-    private final ConcurrentHashMap<Integer, ScheduledFuture<?>> scheduledFutures = new ConcurrentHashMap<Integer, ScheduledFuture<?>>();
-    private final ConcurrentHashMap<Integer, CronTask> cronTasks = new ConcurrentHashMap<Integer, CronTask>();
+    private final ConcurrentHashMap<Integer, ScheduledFuture<?>> scheduledFutures = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, CronTask> cronTasks = new ConcurrentHashMap<>();
+
+    @Autowired
+    private TaskSolverChooser taskSolverChooser;
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar registrar) {
@@ -92,14 +97,8 @@ public class ScheduledTask implements SchedulingConfigurer {
     public CronTask cronTask(TaskEntity TaskEntity, String expression)  {
         return new CronTask(() -> {
                     //每个计划任务实际需要执行的具体业务逻辑
-                    //这里可以采用策略，模式
-                    if (TaskEntity.getTaskId() ==1) {
-                        System.out.println(TaskEntity.getTaskId() +"----"+ new Date());
-
-                    }
-                    if (TaskEntity.getTaskId() ==2){
-                        System.out.println(TaskEntity.getTaskId() +"----"+ new Date());
-                    }
+                    //采用策略，模式 ，执行我们的job
+                   taskSolverChooser.getTask(TaskEntity.getTaskId()).HandlerJob();
                 }, expression);
     }
 

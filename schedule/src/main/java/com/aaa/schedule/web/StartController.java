@@ -1,7 +1,7 @@
 package com.aaa.schedule.web;
 
 import com.aaa.schedule.domain.TaskEntity;
-import com.aaa.schedule.task.ScheduledTask;
+import com.aaa.schedule.task.MyScheduledTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class StartController {
 
     @Autowired
-    private ScheduledTask scheduledTask;
+    private MyScheduledTask scheduledTask;
 
     @PostMapping(value = "/startOrChangeCron")
     public String changeCron(@RequestBody List<TaskEntity> list){

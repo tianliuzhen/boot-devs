@@ -1,4 +1,4 @@
-package com.aaa.schedule.config;
+package com.aaa.schedule.task;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +15,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
  * @author liuzhen.tian
  * @version 1.0 SimpleScheduleConfig.java  2020/12/8 10:50
  */
-@Configuration //1.主要用于标记配置类，兼备Component的效果。
-@EnableScheduling // 2.开启定时任务
-public class SimpleScheduleConfig {
+@Configuration
+public class SimpleTask {
 
     // /**
     //  * 允许并发执行
