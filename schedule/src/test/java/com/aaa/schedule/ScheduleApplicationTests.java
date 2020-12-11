@@ -1,10 +1,10 @@
-package com.aaa.provider;
+package com.aaa.schedule;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProvideApplicationTests {
+class ScheduleApplicationTests {
 
     @Test
     void contextLoads() {
