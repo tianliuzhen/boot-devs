@@ -1,6 +1,6 @@
-package com.aaa.schedule.service.impl;
+package com.aaa.schedule.scheduling.service.impl;
 
-import com.aaa.schedule.service.TaskService;
+import com.aaa.schedule.scheduling.service.TaskService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -10,14 +10,14 @@ import java.util.Date;
  * @version 1.0 TaskServiceV1Impl.java  2020/12/11 15:42
  */
 @Service
-public class TaskServiceJob2Impl implements TaskService {
+public class TaskServiceJob1Impl implements TaskService {
     @Override
     public void HandlerJob() {
-        System.out.println("-----job2 开始执行-------："+new Date());
+        System.out.println("------job1 开始执行---------："+new Date());
     }
 
     @Override
     public Integer jobId() {
-        return 2;
+        return 1;
     }
 }

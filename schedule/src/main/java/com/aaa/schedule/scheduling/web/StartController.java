@@ -1,7 +1,7 @@
-package com.aaa.schedule.web;
+package com.aaa.schedule.scheduling.web;
 
-import com.aaa.schedule.domain.TaskEntity;
-import com.aaa.schedule.task.MyScheduledTask;
+import com.aaa.schedule.scheduling.domain.TaskEntity;
+import com.aaa.schedule.scheduling.task.MyScheduledTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;

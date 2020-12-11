@@ -1,7 +1,7 @@
-package com.aaa.schedule.task;
+package com.aaa.schedule.scheduling.task;
 
-import com.aaa.schedule.domain.TaskEntity;
-import com.aaa.schedule.service.TaskSolverChooser;
+import com.aaa.schedule.scheduling.domain.TaskEntity;
+import com.aaa.schedule.scheduling.service.TaskSolverChooser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.CronTask;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PreDestroy;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;

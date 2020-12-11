@@ -1,4 +1,4 @@
-package com.aaa.schedule.service;
+package com.aaa.schedule.scheduling.service;
 
 
 

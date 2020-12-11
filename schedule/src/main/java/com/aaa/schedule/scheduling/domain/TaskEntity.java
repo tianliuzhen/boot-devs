@@ -1,4 +1,4 @@
-package com.aaa.schedule.domain;
+package com.aaa.schedule.scheduling.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

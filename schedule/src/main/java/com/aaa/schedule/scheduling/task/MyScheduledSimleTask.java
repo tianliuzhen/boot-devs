@@ -1,6 +1,6 @@
-package com.aaa.schedule.task;
+package com.aaa.schedule.scheduling.task;
 
-import com.aaa.schedule.domain.ScheduledtaskEntity;
+import com.aaa.schedule.scheduling.domain.ScheduledtaskEntity;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.scheduling.support.CronTrigger;
