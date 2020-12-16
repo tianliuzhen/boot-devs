@@ -12,15 +12,18 @@ import javax.annotation.Resource;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    // @Resource
+    // private TokenInterceptor tokenInterceptor ;
     @Resource
-    private TokenInterceptor tokenInterceptor ;
+    AuthenticationInterceptor authenticationInterceptor;
     @Resource
     private JwtConfig jwtConfig;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tokenInterceptor).
-                excludePathPatterns(jwtConfig.getIgnoreUrls())
-        .addPathPatterns();
+        // registry.addInterceptor(tokenInterceptor).
+        //         excludePathPatterns(jwtConfig.getIgnoreUrls())
+        // .addPathPatterns();
+        registry.addInterceptor(authenticationInterceptor);
     }
 }
