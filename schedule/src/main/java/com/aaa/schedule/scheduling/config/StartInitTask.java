@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 这里的作用为了，程序启动时首次去加我们设置的task
  * @author liuzhen.tian
  * @version 1.0 StartTask.java  2020/12/11 15:14
  */

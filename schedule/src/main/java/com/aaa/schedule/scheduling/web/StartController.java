@@ -25,6 +25,7 @@ public class StartController {
     @PostMapping(value = "/startOrChangeCron")
     public String changeCron(@RequestBody List<TaskEntity> list){
         if (CollectionUtils.isEmpty(list)) {
+            // 这里模拟存在数据库的数据
             list = Arrays.asList(
                     new TaskEntity(1, "测试1","0/1 * *  * * ?") ,
                     new TaskEntity(2, "测试2","0/1 * *  * * ?")
@@ -37,6 +38,7 @@ public class StartController {
     @PostMapping(value = "/stopCron")
     public String stopCron(@RequestBody List<TaskEntity> list){
         if (CollectionUtils.isEmpty(list)) {
+            // 这里模拟将要停止的cron可通过前端传来
             list = Arrays.asList(
                     new TaskEntity(1, "测试1","0/1 * *  * * ?") ,
                     new TaskEntity(2, "测试2","0/1 * *  * * ?")
