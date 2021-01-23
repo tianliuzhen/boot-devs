@@ -1,7 +1,6 @@
 package com.aaa.schedule.scheduling.task;
 
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +11,7 @@ import java.util.Date;
  * @author liuzhen.tian
  * @version 1.0 SimpleScheduleConfig.java  2020/12/8 10:50
  */
-@Component
+// @Component
 public class SimpleTask {
 
     // /**
