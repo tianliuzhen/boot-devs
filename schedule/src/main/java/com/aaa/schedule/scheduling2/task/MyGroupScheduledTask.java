@@ -59,7 +59,7 @@ public class MyGroupScheduledTask implements SchedulingConfigurer {
      */
     public void refresh(List<TaskGroupEntity> tasks){
         //取消已经删除的策略任务
-        cancelIsDel(tasks);
+        // cancelIsDel(tasks);
 
         //执行每一个类，每个类含有不同的cron方法
         for (TaskGroupEntity task : tasks) {
