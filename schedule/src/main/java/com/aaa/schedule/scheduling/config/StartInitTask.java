@@ -4,7 +4,6 @@ import com.aaa.schedule.scheduling.domain.TaskEntity;
 import com.aaa.schedule.scheduling.task.MyScheduledTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
  * @version 1.0 StartTask.java  2020/12/11 15:14
  */
 
-@Component
+// @Component
 public class StartInitTask implements CommandLineRunner {
 
     @Autowired

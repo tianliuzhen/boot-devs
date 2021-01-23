@@ -33,6 +33,7 @@ public class MyScheduledTask implements SchedulingConfigurer {
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar registrar) {
+
         //设置20个线程,默认单线程,如果不设置的话，不能同时并发执行任务
         registrar.setScheduler(Executors.newScheduledThreadPool(10));
         this.registrar = registrar;

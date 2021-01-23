@@ -1,6 +1,10 @@
 package com.aaa.schedule.scheduling.task;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -8,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author liuzhen.tian
  * @version 1.0 SimpleScheduleConfig.java  2020/12/8 10:50
  */
-@Configuration
+@Component
 public class SimpleTask {
 
     // /**
@@ -22,28 +26,19 @@ public class SimpleTask {
     //     return taskScheduler;
     // }
 
-    // @Scheduled(cron = "0/5 * *  * * ? ")
-    public void startSchedule() {
-        System.out.println("===========1=>");
-        try {
-            for(int i=1;i<=5;i++){
-                System.out.println("=1==>"+i);
-                Thread.sleep(1000);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    //5秒一次
+    @Scheduled(cron = "*/5 * * * * ?")
+    public void task1() throws InterruptedException {
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "    " + Thread.currentThread().getName() + "    任务一启动");
+        Thread.sleep(10000);//任务耗时10秒
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "    " + Thread.currentThread().getName() + "    结束");
+
     }
 
-    // @Scheduled(cron = "0/5 * *  * * ? ")
-    public void startSchedule2() {
-        for(int i=1;i<=5;i++){
-            System.out.println("=2==>"+i);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    @Scheduled(cron = "*/5 * * * * ?")
+    public void task2() throws InterruptedException {
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "    " + Thread.currentThread().getName() + "    任务二启动");
+        Thread.sleep(10000);
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "    " + Thread.currentThread().getName() + "    结束");
     }
 }
