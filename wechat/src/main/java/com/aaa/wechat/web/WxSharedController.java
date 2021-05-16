@@ -1,6 +1,7 @@
 package com.aaa.wechat.web;
 
 import com.aaa.wechat.config.SiteConfig;
+import com.aaa.wechat.utils.IOUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -82,7 +82,7 @@ public class WxSharedController {
 
     //
     private void ImgStream(HttpServletResponse response, InputStream inputStream) throws IOException {
-        byte[] img = read(inputStream);
+        byte[] img = IOUtil.read(inputStream);
         response.setContentType("image/png");
         OutputStream os = response.getOutputStream();
         os.write(img);
@@ -90,30 +90,7 @@ public class WxSharedController {
         os.close();
     }
 
-    /**
-     * InputStream 转 字节
-     *
-     * @param inputStream 输入流
-     * @return byte[]
-     * @throws IOException
-     */
-    public static byte[] read(InputStream inputStream) throws IOException {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int num = inputStream.read(buffer);
-            while (num != -1) {
-                baos.write(buffer, 0, num);
-                num = inputStream.read(buffer);
-            }
-            baos.flush();
-            return baos.toByteArray();
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
-    }
+
 
     public String getToken() throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();

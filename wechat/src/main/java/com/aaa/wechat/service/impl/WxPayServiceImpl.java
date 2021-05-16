@@ -3,7 +3,6 @@ package com.aaa.wechat.service.impl;
 import com.aaa.wechat.config.SiteConfig;
 import com.aaa.wechat.service.WechatPayService;
 import com.aaa.wechat.utils.CommonUtils;
-import com.github.binarywang.wxpay.bean.request.WxPayOrderQueryRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayRefundRequest;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayOrderQueryResult;
