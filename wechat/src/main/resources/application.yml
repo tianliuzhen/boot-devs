@@ -8,7 +8,8 @@ wechat:
 wx:
   wxNotifyUrl:
     # 注意：这里实际应该配置外网可以直接访问的地址
-    notify: https://你的域名/wx-notify/refund
+    refund: https://你的域名/wx-notify/refund
+    pay: https://你的域名/wx-notify/pay
   pay:
     #精选小程序
     jx:
@@ -18,7 +19,7 @@ wx:
       mchId: yyyyyyy
       #微信支付商户密钥
       mchKey: zzzzzzz
-      subAppId: #服务商模式下的子商户公众账号ID
+      subAppId: #服务商模式下的子商户公众账号ID（可选）
       subMchId: #服务商模式下的子商户号
       # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
       keyPath: classpath:apiclient_cert.p12

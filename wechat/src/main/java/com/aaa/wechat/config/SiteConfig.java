@@ -3,8 +3,6 @@ package com.aaa.wechat.config;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,20 +15,20 @@ import org.springframework.stereotype.Component;
 @Setter
 @Getter
 @Component
-@ComponentScan(basePackages = {"com.aaa"})
 public class SiteConfig {
 
 
-    @Value("${wechat.appid}")
-    private String appid;
-
-    @Value("${wechat.secret}")
-    private String secret;
-
-    @Value("${wechat.grant_type}")
-    private String grantType;
-
-    @Value("${wx.wxNotifyUrl.notify}")
+    /**
+     * 退款通知回调url
+     */
+    @Value("${wx.wxNotifyUrl.refund}")
     private String wxRefundNotifyUrl;
+
+    /**
+     * 付款通知回调url
+     */
+    @Value("${wx.wxNotifyUrl.pay}")
+    private String wxPayNotifyUrl;
+
 
 }
