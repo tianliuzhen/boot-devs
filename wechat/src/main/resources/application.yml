@@ -1,7 +1,7 @@
 
 wechat:
-  appid: xxxxxxx
-  secret: yyyyyyy
+  appid: wx21275befc3289eaf
+  secret: 74f4c96bccd72fc1ce2c85204cdca465
   grant_type: authorization_code
 
 
@@ -15,6 +15,7 @@ wx:
     jx:
       #微信公众号或者小程序等的appid
       appId: xxxxxxx
+      secret: kkkkkk
       #微信支付商户号
       mchId: yyyyyyy
       #微信支付商户密钥

@@ -18,6 +18,11 @@ public class WxJxPayProperties {
     private String appId;
 
     /**
+     * 设置微信公众号或者小程序等的appid
+     */
+    private String secret;
+
+    /**
      * 微信支付商户号
      */
     private String mchId;
