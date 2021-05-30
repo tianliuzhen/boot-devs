@@ -1,6 +1,6 @@
 package com.aaa.wechat.web;
 
-import com.aaa.wechat.config.SiteConfig;
+import com.aaa.wechat.config.WxJxPayProperties;
 import com.aaa.wechat.utils.IOUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -31,7 +31,7 @@ import java.io.OutputStream;
 public class WxSharedController {
 
     @Autowired
-    private SiteConfig siteConfig;
+    private WxJxPayProperties siteConfig;
 
 
     /**
@@ -96,7 +96,7 @@ public class WxSharedController {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         String authUrl = "https://api.weixin.qq.com/cgi-bin/token?" +
                 "grant_type=client_credential" +
-                "&appid=" + siteConfig.getAppid() +
+                "&appid=" + siteConfig.getAppId() +
                 "&secret=" + siteConfig.getSecret();
         HttpGet authHttp = new HttpGet(authUrl);
         CloseableHttpResponse response = null;

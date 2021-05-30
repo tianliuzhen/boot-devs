@@ -48,6 +48,8 @@ public class WxJxPayProperties {
      */
     private String keyPath;
 
+    private String grantType;
+
 
 }
 

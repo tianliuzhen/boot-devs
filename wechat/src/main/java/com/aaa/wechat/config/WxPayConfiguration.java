@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 public class WxPayConfiguration {
 
     @Autowired
-    private WxPayProperties payProperties;
+    private WxJxPayProperties payProperties;
 
 
     @Bean(name = "jxWxService")

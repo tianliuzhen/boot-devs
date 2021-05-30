@@ -1,8 +1,7 @@
 package com.aaa.wechat.service.impl;
 
-import com.aaa.wechat.api.TestApi;
 import com.aaa.wechat.api.WechatSdkApi;
-import com.aaa.wechat.config.SiteConfig;
+import com.aaa.wechat.config.WxJxPayProperties;
 import com.aaa.wechat.domain.DecryptSpec;
 import com.aaa.wechat.domain.WechatResponse;
 import com.aaa.wechat.domain.constants.ApiConstants;
@@ -10,15 +9,9 @@ import com.aaa.wechat.service.WeChatService;
 import com.aaa.wechat.utils.AesUtil;
 import com.alibaba.fastjson.JSON;
 import feign.Feign;
-import feign.Request;
-import feign.Retryer;
 import feign.codec.StringDecoder;
-import feign.jackson.JacksonDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author liuzhen.tian
@@ -28,14 +21,14 @@ import java.util.concurrent.TimeUnit;
 public class WeChatServiceImpl implements WeChatService {
 
     @Autowired
-    private SiteConfig siteConfig;
+    private WxJxPayProperties siteConfig;
 
     @Override
     public String getToken(String jCode) {
         WechatSdkApi wechatSdkApi = Feign.builder()
                 .decoder(new StringDecoder())
                 .target(WechatSdkApi.class, ApiConstants.WECHAT_GET_OPENID);
-        String wechatOpen = wechatSdkApi.findById(siteConfig.getAppid(), siteConfig.getSecret(), jCode, siteConfig.getGrantType());
+        String wechatOpen = wechatSdkApi.findById(siteConfig.getAppId(), siteConfig.getSecret(), jCode, siteConfig.getGrantType());
         WechatResponse wechatResponse = JSON.parseObject(wechatOpen, WechatResponse.class);
         String openid = wechatResponse.getOpenid();
         /**
@@ -51,7 +44,7 @@ public class WeChatServiceImpl implements WeChatService {
         WechatSdkApi wechatSdkApi = Feign.builder()
                 .decoder(new StringDecoder())
                 .target(WechatSdkApi.class, ApiConstants.WECHAT_GET_OPENID);
-        String wechatOpen = wechatSdkApi.findById(siteConfig.getAppid(), siteConfig.getSecret(), decryptSpec.getCode(), siteConfig.getGrantType());
+        String wechatOpen = wechatSdkApi.findById(siteConfig.getAppId(), siteConfig.getSecret(), decryptSpec.getCode(), siteConfig.getGrantType());
         WechatResponse wechatResponse = JSON.parseObject(wechatOpen, WechatResponse.class);
 
 
