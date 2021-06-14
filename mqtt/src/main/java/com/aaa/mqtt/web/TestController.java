@@ -8,6 +8,7 @@ package com.aaa.mqtt.web;
 import com.aaa.mqtt.version1.MqttPushClient;
 import com.aaa.mqtt.version2.MyMqttSenderGateWay;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,4 +43,14 @@ public class TestController {
         // 发送自定义消息内容，且指定主题
         myMqttSenderGateWay.sendToMqtt("test-topic", "我是消息");
     }
+
+    @Autowired
+    @Qualifier(value = "testABean")
+    private TestBean testBean;
+
+    @GetMapping(value = "/testABean")
+    public void testABean() {
+        System.out.println(testBean.getBean());
+    }
+
 }
