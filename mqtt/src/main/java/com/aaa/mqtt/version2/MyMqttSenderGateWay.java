@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * MQTT生产者消息发送接口
  */
-@Component(value = "myMqttSender")
+@Component
 @MessagingGateway(defaultRequestChannel = "mqttOutboundChannel")
 public interface MyMqttSenderGateWay {
     /**
