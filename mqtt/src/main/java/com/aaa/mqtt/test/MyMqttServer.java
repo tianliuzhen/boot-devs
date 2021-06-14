@@ -11,7 +11,7 @@ public class MyMqttServer {
     /**
      * 代理服务器ip地址
      */
-    public static final String MQTT_BROKER_HOST = "tcp://121.43.135.86:1883";
+    public static final String MQTT_BROKER_HOST = "tcp://47.96.92.170:1883";
 
     /**
      * 客户端唯一标识
@@ -23,16 +23,16 @@ public class MyMqttServer {
     /**
      *用户
      */
-    public static final String USERNAME = "yoga";
+    public static final String USERNAME = "test";
     /**
      * 密码
      */
-    public static final String PASSWORD = "yoga2021";
+    public static final String PASSWORD = "test";
 
     /**
      * 订阅标识
      */
-    public static final String TOPIC_FILTER = "yoga-topic";
+    public static final String TOPIC_FILTER = "/wx-lock/";
 
     private volatile static MqttClient mqttClient;
     private static MqttConnectOptions options;

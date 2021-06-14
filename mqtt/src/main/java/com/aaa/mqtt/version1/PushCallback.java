@@ -1,4 +1,4 @@
-package com.aaa.mqtt.common;
+package com.aaa.mqtt.version1;
 
 /**
  * @author liuzhen.tian
@@ -10,12 +10,12 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-@Component
+@Service
 public class PushCallback implements MqttCallback {
 
 

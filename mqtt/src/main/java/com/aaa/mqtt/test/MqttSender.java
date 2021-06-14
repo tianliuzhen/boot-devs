@@ -4,6 +4,7 @@ package com.aaa.mqtt.test;
  * @author liuzhen.tian
  * @version 1.0 MqttServer2.java  2021/5/13 23:20
  */
+
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
@@ -11,15 +12,15 @@ public class MqttSender {
     /**
      * 代理服务器ip地址
      */
-    public static final String MQTT_BROKER_HOST = "tcp://121.43.135.86:1883";
+    public static final String MQTT_BROKER_HOST = "tcp://47.96.92.170:1883";
 
     /**
      * 订阅标识
      */
-    public static final String MQTT_TOPIC = "yoga-topic";
+    public static final String MQTT_TOPIC = "/wx-lock/";
 
-    private static String userName = "yogaSender";
-    private static String password = "yogaSender2021";
+    private static String userName = "test2";
+    private static String password = "test";
 
     /**
      * 客户端唯一标识

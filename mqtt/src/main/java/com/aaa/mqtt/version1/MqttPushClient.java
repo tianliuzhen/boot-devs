@@ -1,18 +1,21 @@
-package com.aaa.mqtt.common;
+package com.aaa.mqtt.version1;
 
 /**
  * @author liuzhen.tian
  * @version 1.0 MqttPushClient.java  2021/5/14 21:29
  */
 
+import com.aaa.mqtt.config.MqttProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PostConstruct;
 
 @Slf4j
-@Component
+@Configuration
 public class MqttPushClient {
 
 
@@ -28,6 +31,23 @@ public class MqttPushClient {
     public static MqttClient getClient() {
         return client;
     }
+
+    @Autowired
+    private MqttProperties mqttProperties;
+
+
+    // 初始化连接
+    @PostConstruct
+    public void getMqttPushClient() {
+        //clientID 拼接随机六位小数
+        String clientID = mqttProperties.getClientID() + ((Math.random() * 9 + 1) * 100000);
+        this.connect(mqttProperties.getHostUrl(), clientID,
+                mqttProperties.getUsername(), mqttProperties.getPassword(),
+                mqttProperties.getTimeout(), mqttProperties.getKeepalive());
+        // 以test/#结尾表示订阅所有以test开头的主题
+        this.subscribe(mqttProperties.getDefaultTopic(), 1);
+    }
+
 
     /**
      * 客户端连接

@@ -5,7 +5,7 @@ package com.aaa.mqtt.web;
  * @version 1.0 TestController.java  2021/5/14 21:33
  */
 
-import com.aaa.mqtt.common.MqttPushClient;
+import com.aaa.mqtt.version1.MqttPushClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ public class TestController {
 
     @GetMapping(value = "/publishTopic")
     public String publishTopic() {
-        String topicString = "yoga-topic";
+        String topicString = "wx-lock/lalala";
         mqttPushClient.publish(1, false, topicString, "田留振");
         return "ok";
     }
