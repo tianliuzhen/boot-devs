@@ -1,7 +1,6 @@
 package com.aaa.mqtt.version2;
 
 import com.aaa.mqtt.config.MqttProperties;
-import com.aaa.mqtt.web.TestBean;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -37,14 +36,5 @@ public class MqttConfig {
         return factory;
     }
 
-    @Bean(name = "testABean")
-    public TestBean testABean(){
-        return new TestBean("testABean");
-    }
-
-    @Bean(name = "testABean")
-    public TestBean testABean2(){
-        return new TestBean("testABean2");
-    }
 
 }
