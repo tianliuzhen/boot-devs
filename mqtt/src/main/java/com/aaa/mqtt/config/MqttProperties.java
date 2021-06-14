@@ -36,13 +36,18 @@ public class MqttProperties {
      */
     private String defaultTopic;
     /**
-     * 超时时间
+     * 超时时间,默认是毫秒
      */
     private int timeout;
     /**
      * 保持连接数
      */
     private int keepalive;
+
+    /**
+     * 连接超时时间
+     */
+    private int completionTimeout;
 
 
 }

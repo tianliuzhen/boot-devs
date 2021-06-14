@@ -6,6 +6,7 @@ package com.aaa.mqtt.web;
  */
 
 import com.aaa.mqtt.version1.MqttPushClient;
+import com.aaa.mqtt.version2.MyMqttSenderGateWay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,10 @@ public class TestController {
     @Autowired
     private MqttPushClient mqttPushClient;
 
+
+    /**
+     * 测试版本一
+     */
     @GetMapping(value = "/publishTopic")
     public String publishTopic() {
         String topicString = "wx-lock/lalala";
@@ -24,4 +29,17 @@ public class TestController {
         return "ok";
     }
 
+    /**
+     * 测试版本二
+     * 注入发送MQTT的Bean
+     */
+    @Autowired
+    private MyMqttSenderGateWay myMqttSenderGateWay;
+
+
+    @GetMapping(value = "/mqttGateWay")
+    public void mqttGateWay() {
+        // 发送自定义消息内容，且指定主题
+        myMqttSenderGateWay.sendToMqtt("test-topic", "我是消息");
+    }
 }
