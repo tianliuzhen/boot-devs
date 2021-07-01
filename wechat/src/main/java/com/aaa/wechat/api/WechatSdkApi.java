@@ -1,5 +1,6 @@
 package com.aaa.wechat.api;
 
+import com.aaa.wechat.domain.WxToken;
 import feign.Param;
 import feign.RequestLine;
 
@@ -11,13 +12,17 @@ public interface WechatSdkApi {
 
     /**
      * 表单传参
+     * jscode2session
      */
-    @RequestLine("GET /sns/jscode2session?appid={appid}&secret={secret}&js_code={jsCode}&grant_type={grantType}")
-    String findById(@Param("appid") String appid,
-                    @Param("secret") String secret,
-                    @Param("js_code") String jsCode,
-                    @Param("grant_type") String grantType);
+    @RequestLine("GET /sns/jscode2session?appid={appid}&secret={secret}&js_code={js_code}&grant_type={grant_type}")
+    String jscode2session(@Param("appid") String appid,
+                          @Param("secret") String secret,
+                          @Param("js_code") String jsCode,
+                          @Param("grant_type") String grantType);
 
 
-
+    @RequestLine("GET /cgi-bin/token?appid={appid}&secret={secret}&grant_type={grant_type}")
+    WxToken getToken(@Param("appid") String appid,
+                     @Param("secret") String secret,
+                     @Param("grant_type") String grantType);
 }

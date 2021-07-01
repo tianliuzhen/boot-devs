@@ -1,10 +1,8 @@
-package com.aaa.wechat;
+package com.aaa.wechat.config.feign;
 
 import com.aaa.wechat.api.TestApi;
 import com.aaa.wechat.domain.City;
-import com.aaa.wechat.service.WeChatService;
 import com.google.common.collect.Maps;
-import com.sun.jndi.toolkit.url.Uri;
 import feign.Feign;
 import feign.Request;
 import feign.Retryer;
@@ -14,7 +12,6 @@ import feign.jackson.JacksonEncoder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.annotation.Resource;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -28,12 +25,10 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 public class WeChatTest {
 
-    @Resource
-    private WeChatService weChatService;
-
 
     @Test
     public void testApi() {
+
     }
     @Test
     public void testResponse() {

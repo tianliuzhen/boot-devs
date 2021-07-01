@@ -2,7 +2,6 @@ package com.aaa.wechat.api;
 
 import com.aaa.wechat.domain.City;
 import feign.*;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.net.URI;
 import java.util.Map;
@@ -16,33 +15,41 @@ public interface TestApi {
     /**
      * 无参
      */
-    @RequestLine("GET /user/objectResponseDate")
-     Object response();
+    @RequestLine("GET /objectResponseDate")
+    String response();
+
     /**
-     * 表单传参
+     * 表单传参 * V2
      */
-    @RequestLine("GET /user/findById?id={idss}")
-    String findById(@Param("idss") int id );
+    @RequestLine("GET /findById?id={idss}")
+    String findById(@Param("idss") int id);
 
 
     /**
-     * 表单传参V2
+     * 表单传参 * V2
      */
-    @RequestLine("GET /user/findById")
+    @RequestLine("GET /findById")
     String findByIdV2(@QueryMap Map<String, Integer> queryMap);
 
     /**
-     * 传 json
-     * @param city
-     * @return
+     * json 传参 * V1
+     *
+     * @param city （json格式）
      */
     @RequestLine("POST /user/findByMap")
-    @Headers({"Content-Type: application/json","Accept: application/json"})
-    Object findByMap(City city);
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    String findByMap(City city);
 
+    /**
+     * json 传参 * V2
+     *
+     * @param baseUri   URI
+     * @param headerMap header
+     * @param city      城市 pojo （json格式）
+     */
     @RequestLine("POST")
-    @Headers({"Content-Type: application/json","Accept: application/json"})
-    Object findByMapV2(URI baseUri, @HeaderMap Map<String,String> headerMap, @RequestBody City city) ;
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    String findByMapV2(URI baseUri, @HeaderMap Map<String, String> headerMap, City city);
 
 
 }

@@ -1,9 +1,9 @@
 
 wechat:
-  appid: wx21275befc3289eaf
-  secret: 74f4c96bccd72fc1ce2c85204cdca465
+  appid: wx83500bdb52abbdcb
+  secret: d72828cbfff6c54b9e5fcdabb7f04644
   grant_type: authorization_code
-
+  grant_type_2: client_credential
 
 wx:
   wxNotifyUrl:

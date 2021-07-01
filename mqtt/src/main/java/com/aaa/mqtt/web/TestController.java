@@ -41,7 +41,7 @@ public class TestController {
     @GetMapping(value = "/mqttGateWay")
     public void mqttGateWay() {
         // 发送自定义消息内容，且指定主题
-        myMqttSenderGateWay.sendToMqtt("test-topic", "我是消息");
+        myMqttSenderGateWay.sendToMqtt("/qr_gate/15736758729/update", "{\"DevSn\":\"1212012432\",\"TimeStamp\":\"1610416762\",\"RecordType\":2,\"CardNum\":\"15736758729\",\"IsVaild\":1,\"RecordTime\":\"2021/1/15 9:58:30\"}");
     }
 
     @Autowired

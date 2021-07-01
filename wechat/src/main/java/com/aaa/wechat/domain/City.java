@@ -1,7 +1,9 @@
 package com.aaa.wechat.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * description: 描述
@@ -12,6 +14,8 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class City {
     /**
      * 城市名称

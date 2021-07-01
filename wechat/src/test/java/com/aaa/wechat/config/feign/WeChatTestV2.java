@@ -1,11 +1,8 @@
-package com.aaa.wechat;
+package com.aaa.wechat.config.feign;
 
 import com.aaa.wechat.api.TestApiV2;
 import com.aaa.wechat.domain.City;
 import com.google.common.collect.Maps;
-import feign.Feign;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

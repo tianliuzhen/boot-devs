@@ -5,6 +5,7 @@ import com.aaa.wechat.config.WxJxPayProperties;
 import com.aaa.wechat.domain.DecryptSpec;
 import com.aaa.wechat.domain.WechatResponse;
 import com.aaa.wechat.domain.constants.ApiConstants;
+import com.aaa.wechat.fegin.FeignClientFactory;
 import com.aaa.wechat.service.WeChatService;
 import com.aaa.wechat.utils.AesUtil;
 import com.alibaba.fastjson.JSON;
@@ -25,10 +26,9 @@ public class WeChatServiceImpl implements WeChatService {
 
     @Override
     public String getToken(String jCode) {
-        WechatSdkApi wechatSdkApi = Feign.builder()
-                .decoder(new StringDecoder())
-                .target(WechatSdkApi.class, ApiConstants.WECHAT_GET_OPENID);
-        String wechatOpen = wechatSdkApi.findById(siteConfig.getAppId(), siteConfig.getSecret(), jCode, siteConfig.getGrantType());
+        WechatSdkApi sdkApi = FeignClientFactory.create(WechatSdkApi.class, ApiConstants.WECHAT_GET_OPENID);
+        String wechatOpen = sdkApi.jscode2session(siteConfig.getAppId(), siteConfig.getSecret(), jCode, siteConfig.getGrantType());
+
         WechatResponse wechatResponse = JSON.parseObject(wechatOpen, WechatResponse.class);
         String openid = wechatResponse.getOpenid();
         /**
@@ -44,13 +44,13 @@ public class WeChatServiceImpl implements WeChatService {
         WechatSdkApi wechatSdkApi = Feign.builder()
                 .decoder(new StringDecoder())
                 .target(WechatSdkApi.class, ApiConstants.WECHAT_GET_OPENID);
-        String wechatOpen = wechatSdkApi.findById(siteConfig.getAppId(), siteConfig.getSecret(), decryptSpec.getCode(), siteConfig.getGrantType());
+        String wechatOpen = wechatSdkApi.jscode2session(siteConfig.getAppId(), siteConfig.getSecret(), decryptSpec.getCode(), siteConfig.getGrantType());
         WechatResponse wechatResponse = JSON.parseObject(wechatOpen, WechatResponse.class);
 
 
         String result = "";
         try {
-            result = AesUtil.decryptWXAppletInfo(wechatResponse.getSessionKey(),  decryptSpec.getEncryptedData(), decryptSpec.getIv());
+            result = AesUtil.decryptWXAppletInfo(wechatResponse.getSessionKey(), decryptSpec.getEncryptedData(), decryptSpec.getIv());
         } catch (Exception e) {
             e.printStackTrace();
         }
