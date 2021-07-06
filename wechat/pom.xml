@@ -46,19 +46,6 @@
             <version>1.4.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-jackson -->
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
-            <version>11.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-jackson -->
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
-            <version>11.0</version>
-        </dependency>
-
         <!--  微信支付 api -->
         <!-- https://mvnrepository.com/artifact/com.github.binarywang/weixin-java-pay -->
         <dependency>
@@ -92,6 +79,30 @@
             <version>5.2.8.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-core -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>11.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-jackson -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>11.2</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-okhttp -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+            <version>11.2</version>
+        </dependency>
+
+
 
 
     </dependencies>
