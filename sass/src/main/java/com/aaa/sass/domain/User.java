@@ -2,11 +2,8 @@ package com.aaa.sass.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,6 +13,9 @@ import java.util.Date;
 @Data
 public class User {
     private static final long serialVersionUID = -656178832709238674L;
+
+    private String userId;
+
     /**
      *[出参格式化][入参格式化]  jackson注解，用于返回格式化后的字符串，这里设置仅是局部剩生效
      * 作用：
@@ -28,4 +28,8 @@ public class User {
      */
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    public User(String userId) {
+        this.userId = userId;
+    }
 }

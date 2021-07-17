@@ -1,6 +1,7 @@
 package com.aaa.sass.config;
 
 import com.aaa.sass.annotation.NonLogin;
+import com.aaa.sass.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureException;
 import org.springframework.stereotype.Component;
@@ -42,19 +43,19 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         }
 
         /** 地址过滤 */
-        String uri = request.getRequestURI() ;
-        if (uri.contains("/login")){
-            return true ;
+        String uri = request.getRequestURI();
+        if (uri.contains("/login")) {
+            return true;
         }
         /** Token 验证 */
         String token = request.getHeader(jwtConfig.getHeader());
-        if(StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             token = request.getParameter(jwtConfig.getHeader());
         }
         Claims claims = null;
         if (nonLoginAnnotation == null) {
-            if(StringUtils.isEmpty(token)){
-                throw new SignatureException(jwtConfig.getHeader() +" 不能为空");
+            if (StringUtils.isEmpty(token)) {
+                throw new SignatureException(jwtConfig.getHeader() + " 不能为空");
                 // Shift.fatal(ResultCode.SYSTEM_ERROR);
             }
             try {
@@ -67,7 +68,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             }
             /** 设置 identityId 用户身份ID */
             request.setAttribute("identityId", claims.getSubject());
-        }else {
+            UserContext.setUser(new User(claims.getSubject()));
+        } else {
             // 无需操作登录token的一些操作
         }
 
@@ -86,5 +88,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest httpServletRequest,
                                 HttpServletResponse httpServletResponse,
                                 Object o, Exception e) throws Exception {
+        UserContext.remove();
     }
 }

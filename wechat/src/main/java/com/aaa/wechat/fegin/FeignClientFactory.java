@@ -55,10 +55,9 @@ public abstract class FeignClientFactory {
                 .logger(new Logger.ErrorLogger()).logLevel(Logger.Level.FULL)
                 .retryer(Retryer.NEVER_RETRY)
                 .encoder(new FeignEncoder())
-
-                // 使用StreamDecoder做解码
+                // 使用JacksonDecoder做解码
                 .decoder(new JacksonDecoder())
-                .decode404() // 把404也解码 -> 这样就不会以一场形式抛出，中断程序喽，方便我测试嘛
+                .decode404()
                 .target(clazz, url);
     }
 }
