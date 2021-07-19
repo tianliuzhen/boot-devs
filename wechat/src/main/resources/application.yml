@@ -31,3 +31,14 @@ wx:
 user:
   server:
     url: http://127.0.0.1:8070
+
+spring:
+  jackson:
+    #参数意义：
+    #JsonInclude.Include.ALWAYS       默认
+    #JsonInclude.Include.NON_DEFAULT   属性为默认值不序列化
+    #JsonInclude.Include.NON_EMPTY     属性为 空（””） 或者为 NULL 都不序列化
+    #JsonInclude.Include.NON_NULL      属性为NULL  不序列化
+    default-property-inclusion: ALWAYS
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * description: 描述
  *
@@ -25,4 +27,11 @@ public class City {
      * 城市code
      */
     private Integer cityCode;
+
+    private Date date;
+
+    public City(String cityName, Integer cityCode) {
+        this.cityName = cityName;
+        this.cityCode = cityCode;
+    }
 }

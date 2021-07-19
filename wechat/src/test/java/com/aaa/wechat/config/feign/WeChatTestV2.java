@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -21,7 +22,7 @@ public class WeChatTestV2 {
     public void testFindById() {
         Map<String, String> headerMap = Maps.newHashMap();
         headerMap.put("token", "123");
-        Object hz = TestApiV2.connect().findByMapV3(headerMap,new City("hz", 123));
+        Object hz = TestApiV2.connect().findByMapV3(headerMap,new City("hz", 123,new Date()));
         System.out.println(hz);
     }
     @Test

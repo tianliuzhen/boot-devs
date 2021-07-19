@@ -16,7 +16,7 @@ spring:
 config:
   jwt:
     secret: abcdefg1234567  # 加密密钥
-    expire: 3600  # token有效时长
+    expire: 3600  # token有效时长，这里表示3600秒，表示一个小时
     header: token  # header 名称
     ignore-urls:
       - /error

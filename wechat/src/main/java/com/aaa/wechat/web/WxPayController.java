@@ -1,5 +1,6 @@
 package com.aaa.wechat.web;
 
+import com.aaa.wechat.domain.City;
 import com.aaa.wechat.service.WechatPayService;
 import com.aaa.wechat.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  *  微信支付接口、退款接口
@@ -23,6 +25,12 @@ public class WxPayController {
     @Autowired
     private WechatPayService wechatPayService;
 
+    @PostMapping("/aaa")
+    public City aaa(){
+        City city = new City();
+        city.setDate(new Date());
+        return city;
+    }
 
 
     @PostMapping("/pay")
