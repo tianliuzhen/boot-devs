@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * WeChatService
+ * WeChatService #
  *
  * @author liuzhen.tian
  * @version 1.0 WeChatServiceImpl.java  2020/8/22 15:54
