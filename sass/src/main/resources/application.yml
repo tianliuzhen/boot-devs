@@ -7,10 +7,10 @@ spring:
     name: sass
   # jackson时间格式化
   jackson:
-#   返回序列化时间戳
-#   serialization:
-#   write-dates-as-timestamps: true
-#   返回序列化指定格式
+    #   返回序列化时间戳
+    #   serialization:
+    #   write-dates-as-timestamps: true
+    #   返回序列化指定格式
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 config:
@@ -24,3 +24,14 @@ config:
       - /doc.html
       - /v2/api-docs
       - /webjars/**
+logging:
+  #  参考:https://cloud.tencent.com/developer/article/1658598
+  #  默认名log4j2-spring.xml，就省下了在application.yml中配置
+  config: classpath:log4j2-spring.xml
+  #  日志水平等级
+  level:
+    com.aaa.sass: info
+  #  日志位置
+  file:
+    path: ./log
+
