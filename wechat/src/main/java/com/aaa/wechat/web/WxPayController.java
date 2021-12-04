@@ -28,6 +28,7 @@ public class WxPayController {
     @PostMapping("/aaa")
     public City aaa(){
         City city = new City();
+        city.setCityName(null);
         city.setDate(new Date());
         return city;
     }

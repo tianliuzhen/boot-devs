@@ -117,6 +117,14 @@
             <version>${easy-poi.version}</version>
         </dependency>
 
+
+        <!-- 自定义springBoot starter -->
+        <dependency>
+            <groupId>com.aaa</groupId>
+            <artifactId>tlz-spring-boot-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>

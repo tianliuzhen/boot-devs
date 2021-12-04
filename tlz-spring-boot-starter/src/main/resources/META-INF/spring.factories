@@ -1,0 +1,4 @@
+# Auto Configure ×Ô¶¨Òåbean
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.aaa.tlzspringbootstarter.common.TlzProperties,\
+com.aaa.tlzspringbootstarter.common.TlzService

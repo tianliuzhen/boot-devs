@@ -1,0 +1,4 @@
+tlz:
+  appid: appid12345
+  secret: secret123456
+  appid2: appid123456 #废弃字段

@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /v1
 spring:
+  profiles:
+    active: test-tlz
   application:
     name: sass
   # jackson时间格式化

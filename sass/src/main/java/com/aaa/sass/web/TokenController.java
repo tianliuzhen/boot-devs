@@ -9,7 +9,10 @@ import com.aaa.sass.annotation.NonLogin;
 import com.aaa.sass.config.JwtConfig;
 import com.aaa.sass.config.UserContext;
 import com.aaa.sass.domain.User;
+import com.aaa.tlzspringbootstarter.common.TlzProperties;
+import com.aaa.tlzspringbootstarter.common.TlzService;
 import com.alibaba.fastjson.JSON;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.util.StringUtils;
@@ -24,6 +27,20 @@ public class TokenController {
 
     @Resource
     private JwtConfig jwtConfig;
+
+    @Autowired
+    private TlzService tlzService;
+    @Autowired
+    private TlzProperties tlzProperties;
+
+
+    @NonLogin
+    @PostMapping("/testStarter")
+    public void testStarter() {
+        String bySelf = tlzService.getBySelf("");
+
+    }
+
 
     /**
      * 用户登录接口
