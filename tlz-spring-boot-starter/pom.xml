@@ -18,12 +18,14 @@
     </properties>
     <dependencies>
 
+        <!--  引入spring-boot-autoconfigure自动注入     -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
             <scope>compile</scope>
         </dependency>
 
+        <!--  引入spring-boot-configuration-processor自动注释-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>

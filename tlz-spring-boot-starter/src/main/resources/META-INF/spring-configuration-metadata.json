@@ -1,0 +1,52 @@
+{
+  "groups": [
+    {
+      "name": "tlz2",
+      "type": "com.aaa.tlzspringbootstarter.common.Tlz2Properties",
+      "sourceType": "com.aaa.tlzspringbootstarter.common.Tlz2Properties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "tlz2.appid",
+      "type": "java.lang.String",
+      "description": "小程序id",
+      "sourceType": "com.aaa.tlzspringbootstarter.common.Tlz2Properties"
+    },
+    {
+      "name": "tlz2.enable",
+      "type": "java.lang.Boolean",
+      "description": "是否启用",
+      "sourceType": "com.aaa.tlzspringbootstarter.common.Tlz2Properties",
+      "defaultValue": false
+    }
+  ],
+  "hints": [
+    {
+      "name": "tlz2.enable",
+      "values": [
+        {
+          "value": true,
+          "description": "测试 tlz2 enable true"
+        },
+        {
+          "value": false,
+          "description": "测试 tlz2 enable false"
+        }
+      ]
+    },
+    {
+      "name": "tlz2.appid",
+      "values": [
+        {
+          "value": "test1",
+          "description": "测试 tlz2 appid1"
+        },
+        {
+          "value": "test2",
+          "description": "测试 tlz2 appid2"
+        }
+      ]
+    }
+  ]
+}
