@@ -8,12 +8,11 @@
     <Properties>
         <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
         <!-- %logger{36} 表示 Logger 名字最长36个字符 -->
-        <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-        <!-- 定义日志存储的路径
-        ${sys:LOG_PATH} 读取的就是 application.yml 中的 logging.file.path 的值
+        <property name="LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+        <!-- 定义日志存储的路径: ${ctx:log.path} 读取的就是 application.yml 中的 logging.file.path 的值
         注：在 logback.xml 中，这个值是 ${LOG_PATH} 没有 sys:  -->
         <property name="FILE_PATH" value="${ctx:log.path}"/>
-        <!-- 定义日志存储的名字 -->
+        <!-- 定义日志存储的名字": ${ctx:log.name} 读取的就是 application.yml 中的 spring.application.name  -->
         <property name="FILE_NAME" value="${ctx:log.name}"/>
 
         <!-- <springProperty scope="context" name="FILE_NAME" source="spring.application.name" defaultValue="localhost.log"/>-->
