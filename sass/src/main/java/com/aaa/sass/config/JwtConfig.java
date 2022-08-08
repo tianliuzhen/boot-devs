@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * https://blog.csdn.net/weixin_42399342/article/details/112157011
+ *
  * 注意：JWT的token，区分大小写
  * @author liuzhen.tian
  * @version 1.0 TokenInterceptor.java  2020/7/30 21:22
