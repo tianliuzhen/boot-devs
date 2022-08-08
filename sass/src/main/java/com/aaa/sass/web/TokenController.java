@@ -12,6 +12,7 @@ import com.aaa.sass.domain.User;
 import com.aaa.tlzspringbootstarter.common.TlzProperties;
 import com.aaa.tlzspringbootstarter.common.TlzService;
 import com.alibaba.fastjson.JSON;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -22,6 +23,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
+@Log4j2
 @RestController
 public class TokenController {
 
@@ -69,8 +71,12 @@ public class TokenController {
     /**
      * 需要 Token 验证的接口
      */
+    @NonLogin
     @PostMapping("/info")
     public String info() {
+        log.info("info###########");
+        log.error("info###########");
+        log.warn("info###########");
         return "info";
     }
 

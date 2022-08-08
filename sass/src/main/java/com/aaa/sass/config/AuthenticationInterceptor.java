@@ -4,6 +4,7 @@ import com.aaa.sass.annotation.NonLogin;
 import com.aaa.sass.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.SignatureException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
@@ -18,9 +19,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author liuzhen.tian
  * @version 1.0 AuthenticationInterceptor.java  2020/12/16 13:08
  */
+
+@Slf4j
 @Component
 public class AuthenticationInterceptor implements HandlerInterceptor {
 
+    public static final String AUTH_HEADER_KEY = "Authorization";
+    public static final String TOKEN_PREFIX = "Bearer ";
 
     @Resource
     private JwtConfig jwtConfig;
@@ -47,6 +52,18 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         if (uri.contains("/login")) {
             return true;
         }
+
+        /**
+         * bearer token 认证改造
+         */
+        // 获取请求头信息authorization信息
+        // final String authHeader = request.getHeader(AUTH_HEADER_KEY);
+        // log.info("## authHeader= {}", authHeader);
+        // if (StringUtils.isBlank(authHeader) || !authHeader.startsWith(JwtTokenUtil.TOKEN_PREFIX)) {
+        //     log.info("### 用户未登录，请先登录 ###");
+        //     throw new SignatureException("用户未登录，请先登录");
+        // }
+
         /** Token 验证 */
         String token = request.getHeader(jwtConfig.getHeader());
         if (StringUtils.isEmpty(token)) {
