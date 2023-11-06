@@ -1,14 +1,13 @@
-package com.aaa.wechat;
+package com.aaa.springsecurity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@tk.mybatis.spring.annotation.MapperScan("com.aaa.wechat.mapper")
-public class WechatApplication {
+public class SpringSecurityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WechatApplication.class, args);
+        SpringApplication.run(SpringSecurityApplication.class, args);
     }
 
 }
