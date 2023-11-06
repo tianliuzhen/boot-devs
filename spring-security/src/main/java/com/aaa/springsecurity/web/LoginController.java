@@ -3,6 +3,7 @@ package com.aaa.springsecurity.web;
 import com.aaa.springsecurity.config.secrity.MyTokenService;
 import com.aaa.springsecurity.config.secrity.model.AjaxResult;
 import com.aaa.springsecurity.config.secrity.model.LoginUser;
+import com.aaa.springsecurity.config.secrity.util.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,5 +39,11 @@ public class LoginController {
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         String token = tokenService.createToken(loginUser);
         return AjaxResult.success(token);
+    }
+
+    @GetMapping("/getUserByToken")
+    public AjaxResult getUserByToken(String token) {
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        return AjaxResult.success(loginUser);
     }
 }
