@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -28,8 +29,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @EnableWebSecurity
+/**
+ * @EnableGlobalMethodSecurity注解是Spring Security框架中的一个重要组成部分，
+ * 用于开启Spring环境的方法级安全。当我们在任何@Configuration实例上使用@EnableGlobalMethodSecurity注解时，就可以开启Spring方法级安全。
+ * 这个注解提供了prePostEnabled、securedEnabled和jsr250Enabled三种不同的机制来实现同一种功能。
+ * 从名字可以推断，
+ * @PreAuthorize注解会在方法执行前进行验证，
+ * @PostAuthorize注解会在方法执行后进行验证。
+ * @Secured等注解来对方法的访问进行控制，实现细粒度的安全控制
+ * 我们可以在方法上使用如@PreAuthorize、@PostAuthorize、@Secured等注解来对方法的访问进行控制，实现细粒度的安全控制。
+ */
+@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true) //生效@PreAuthorize注解
 public class SecurityConfig {
 
+    /**
+     * jwt过滤器
+     */
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationFilter;
 
@@ -41,7 +56,8 @@ public class SecurityConfig {
 
     /**
      * 密码明文加密方式配置
-     *默认加密方式
+     * 默认加密方式
+     *
      * @return
      */
     @Bean
@@ -52,6 +68,7 @@ public class SecurityConfig {
     /**
      * 获取AuthenticationManager（认证管理器），登录时认证使用
      * 默认认证
+     *
      * @param authenticationConfiguration
      * @return
      * @throws Exception
@@ -75,7 +92,9 @@ public class SecurityConfig {
         //定义filter的先后顺序，保证 jwtFilter比用户验证的过滤器先执行
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         //自定义异常捕获机制
-        http.exceptionHandling().authenticationEntryPoint(myAuthenticationEntryPoint).accessDeniedHandler(myAccessDeniedHandler);
+        http.exceptionHandling()
+                .authenticationEntryPoint(myAuthenticationEntryPoint)
+                .accessDeniedHandler(myAccessDeniedHandler);
         return http.build();
     }
 }

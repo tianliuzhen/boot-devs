@@ -1,10 +1,14 @@
 package com.aaa.springsecurity.config.secrity.model;
 
+import com.aaa.springsecurity.config.secrity.PermissionService;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author liuzhen.tian
@@ -27,15 +31,43 @@ public class LoginUser implements UserDetails {
      */
     private String token;
 
+    /**
+     * 权限列表
+     */
+    private Set<String> permissions;
+
+    /**
+     * 角色
+     */
+    private List<GrantedAuthority> authorities;
+
+
+    /**
+     * 用户信息
+     */
+    private SysUser user;
+
     public LoginUser(String userName, String password) {
         this.userName = userName;
         this.password = password;
+        this.permissions = new HashSet<String>() {{
+            add(PermissionService.ALL_PERMISSION);
+        }};
+    }
+
+    public LoginUser(String userName, String password, List<GrantedAuthority> authorities) {
+        this.userName = userName;
+        this.password = password;
+        this.permissions = new HashSet<String>() {{
+            add(PermissionService.ALL_PERMISSION);
+        }};
+        this.authorities = authorities;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.authorities;
     }
 
     @Override

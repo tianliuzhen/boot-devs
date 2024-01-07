@@ -12,34 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @version 1.0 SecurityUtils.java  2023/11/6 22:40
  */
 public class SecurityUtils {
-    /**
-     * 获取用户账户
-     **/
-    public static String getUsername() {
-        try {
-            return getLoginUser().getUsername();
-        } catch (Exception e) {
-            throw new CustomException("获取用户账户异常", HttpStatus.UNAUTHORIZED);
-        }
-    }
-
-    /**
-     * 获取用户
-     **/
-    public static LoginUser getLoginUser() {
-        try {
-            return (LoginUser) getAuthentication().getPrincipal();
-        } catch (Exception e) {
-            throw new RuntimeException("获取用户信息异常" + HttpStatus.UNAUTHORIZED);
-        }
-    }
-
-    /**
-     * 获取Authentication
-     */
-    public static Authentication getAuthentication() {
-        return SecurityContextHolder.getContext().getAuthentication();
-    }
 
     /**
      * 生成BCryptPasswordEncoder密码
@@ -73,4 +45,35 @@ public class SecurityUtils {
     public static boolean isAdmin(Long userId) {
         return userId != null && 1L == userId;
     }
+
+
+    /**
+     * 获取用户账户
+     **/
+    public static String getUsername() {
+        try {
+            return getLoginUser().getUsername();
+        } catch (Exception e) {
+            throw new CustomException("获取用户账户异常", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    /**
+     * 获取用户
+     **/
+    public static LoginUser getLoginUser() {
+        try {
+            return (LoginUser) getAuthentication().getPrincipal();
+        } catch (Exception e) {
+            throw new RuntimeException("获取用户信息异常" + HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    /**
+     * 获取Authentication
+     */
+    public static Authentication getAuthentication() {
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
+
 }
