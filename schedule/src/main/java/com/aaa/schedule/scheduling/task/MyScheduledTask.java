@@ -33,6 +33,7 @@ public class MyScheduledTask implements SchedulingConfigurer {
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar registrar) {
+        //默认是单线程 org.springframework.scheduling.config.ScheduledTaskRegistrar.scheduleTasks
 
         //设置20个线程,默认单线程,如果不设置的话，不能同时并发执行任务
         registrar.setScheduler(Executors.newScheduledThreadPool(10));
@@ -72,6 +73,7 @@ public class MyScheduledTask implements SchedulingConfigurer {
 
 
             //执行业务
+            registrar.addTriggerTask(task.getRunnable(), task.getTrigger());
             ScheduledFuture<?> future = registrar.getScheduler().schedule(task.getRunnable(), task.getTrigger());
             cronTasks.put(TaskEntity.getTaskId(), task);
             scheduledFutures.put(TaskEntity.getTaskId(), future);
