@@ -1,6 +1,5 @@
 package com.aaa.schedule.scheduling.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
  * @version 1.0 LogTask.java  2020/12/11 9:59
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class TaskEntity {
     /**
@@ -24,4 +22,10 @@ public class TaskEntity {
      * cron 表达式
      */
     private String expression;
+
+    public TaskEntity(int taskId, String desc, String expression) {
+        this.taskId = taskId;
+        this.desc = desc;
+        this.expression = expression;
+    }
 }

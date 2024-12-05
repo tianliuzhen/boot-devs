@@ -51,32 +51,32 @@ public class MyScheduledTask implements SchedulingConfigurer {
                 scheduledFutures.get(sid).cancel(false);
             }
         }
-        for (TaskEntity TaskEntity : tasks) {
-            String expression = TaskEntity.getExpression();
+        for (TaskEntity taskEntity : tasks) {
+            String expression = taskEntity.getExpression();
             //计划任务表达式为空则跳过
             if(!StringUtils.hasLength(expression)){
                 continue;
             }
             //计划任务已存在并且表达式未发生变化则跳过
-            if (scheduledFutures.containsKey(TaskEntity.getTaskId())
-                    && cronTasks.get(TaskEntity.getTaskId()).getExpression().equals(expression)) {
+            if (scheduledFutures.containsKey(taskEntity.getTaskId())
+                    && cronTasks.get(taskEntity.getTaskId()).getExpression().equals(expression)) {
                 continue;
             }
             //如果策略执行时间发生了变化，则取消当前策略的任务
-            if(scheduledFutures.containsKey(TaskEntity.getTaskId())){
-                scheduledFutures.get(TaskEntity.getTaskId()).cancel(false);
-                scheduledFutures.remove(TaskEntity.getTaskId());
-                cronTasks.remove(TaskEntity.getTaskId());
+            if(scheduledFutures.containsKey(taskEntity.getTaskId())){
+                scheduledFutures.get(taskEntity.getTaskId()).cancel(false);
+                scheduledFutures.remove(taskEntity.getTaskId());
+                cronTasks.remove(taskEntity.getTaskId());
             }
             //业务逻辑处理
-            CronTask task = cronTask(TaskEntity, expression);
+            CronTask task = cronTask(taskEntity, expression);
 
 
             //执行业务
             registrar.addTriggerTask(task.getRunnable(), task.getTrigger());
             ScheduledFuture<?> future = registrar.getScheduler().schedule(task.getRunnable(), task.getTrigger());
-            cronTasks.put(TaskEntity.getTaskId(), task);
-            scheduledFutures.put(TaskEntity.getTaskId(), future);
+            cronTasks.put(taskEntity.getTaskId(), task);
+            scheduledFutures.put(taskEntity.getTaskId(), future);
         }
     }
 
