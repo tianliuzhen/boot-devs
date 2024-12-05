@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    biz:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/master?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      #配置JDBC Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #配置数据库用户名
+      username: root
+      #配置数据库密码
+      password: 123456
+    quartz:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/master-quartz?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      #配置JDBC Driver
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #配置数据库用户名
+      username: root
+      #配置数据库密码
+      password: 123456
+
+---
+# org.springframework.boot.autoconfigure.quartz.QuartzProperties
+spring:
+  quartz:
+    #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            # 集群名，区分同一系统的不同实例，若使用集群功能，则每一个实例都要使用相同的名字
+            instanceName: SERVICEX-SCHEDULER-INSTANCE
+            # 若是集群下，每个instanceId必须唯一
+            instanceId: AUTO
+          threadPool:
+            #一般使用这个便可
+            class: org.quartz.simpl.SimpleThreadPool
+            #线程数量，不会动态增加
+            threadCount: 20
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+          jobStore:
+            #选择JDBC的存储方式
+            #            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            #            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            tablePrefix: QRTZ_
+            useProperties: false
+            isClustered: true
+            clusterCheckinInterval: 15000
+    job-store-type: jdbc
+    # 默认为false， 用于设定是否等待任务执行完毕后容器才会关闭。 "
+    wait-for-jobs-to-complete-on-shutdown: false
+    # 默认为false， 配置的JOB是否覆盖已经存在的JOB信息
+    overwrite-existing-jobs: false
+    # 是否初始化表结构，首次启动用 ALWAYS ，或者自定义导入sql文件
+    jdbc:
+      initialize-schema: never
+
