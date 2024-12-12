@@ -38,19 +38,20 @@ spring:
             threadPriority: 5
             threadsInheritContextClassLoaderOfInitializingThread: true
           jobStore:
-            #选择JDBC的存储方式
-            #            class: org.quartz.impl.jdbcjobstore.JobStoreTX
-            #            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            # 选择JDBC的存储方式
+            # class: org.quartz.impl.jdbcjobstore.JobStoreTX # 默认是：JobStoreCMT ,此选项已废弃
+            # driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
             tablePrefix: QRTZ_
             useProperties: false
             isClustered: true
             clusterCheckinInterval: 15000
+    # 启动jdbc: JdbcStoreTypeConfiguration.dataSourceCustomizer [@ConditionalOnProperty(prefix = "spring.quartz", name = "job-store-type", havingValue = "jdbc")]
     job-store-type: jdbc
     # 默认为false， 用于设定是否等待任务执行完毕后容器才会关闭。 "
     wait-for-jobs-to-complete-on-shutdown: false
     # 默认为false， 配置的JOB是否覆盖已经存在的JOB信息
     overwrite-existing-jobs: false
-    # 是否初始化表结构，首次启动用 ALWAYS ，或者自定义导入sql文件
+    # 是否初始化表结构，首次启动用 ALWAYS ，后面改为never，或者自定义导入sql文件: org.quartz.impl.jdbcjobstore/tables_mysql_innodb.sql
     jdbc:
       initialize-schema: never
 

@@ -2,13 +2,12 @@ package com.aaa.schedule.quartz.demo.demo1;
 
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author liuzhen.tian
  * @version 1.0 SampleScheduler.java  2020/12/11 17:17
  */
-@Configuration
+// @Configuration
 public class SampleScheduler {
 
     @Bean
