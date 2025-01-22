@@ -1,0 +1,10 @@
+mybatis:
+  type-aliases-package: com.aaa.sdj.model
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #?????sql
+
+
+logging:
+  level:
+    com.aaa.sdj.dal: debug
