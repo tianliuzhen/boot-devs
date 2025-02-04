@@ -6,6 +6,7 @@ import com.aaa.springsecurity.config.secrity.model.LoginUser;
 import com.aaa.springsecurity.config.secrity.util.SecurityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author liuzhen.tian
@@ -28,15 +31,28 @@ public class LoginController {
     @Autowired
     private MyTokenService tokenService;
 
+    // 令牌自定义标识
+    @Value("${token.header}")
+    private String header;
+
+
     @GetMapping("/login")
     public AjaxResult login(@RequestParam(defaultValue = "admin", required = false) String username,
-                            @RequestParam(defaultValue = "123456", required = false) String password) {
+                            @RequestParam(defaultValue = "123456", required = false) String password,
+                            HttpServletResponse response) {
         // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         String token = tokenService.createToken(loginUser);
+
+        // 设置cookie
+        Cookie cookie = new Cookie(header, token);
+        cookie.setMaxAge(7 * 24 * 60 * 60); // 7天过期
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
         return AjaxResult.success(token);
     }
 

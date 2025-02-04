@@ -3,7 +3,6 @@ package com.aaa.springsecurity.config.secrity.filter;
 import com.aaa.springsecurity.config.secrity.MyTokenService;
 import com.aaa.springsecurity.config.secrity.model.LoginUser;
 import com.aaa.springsecurity.config.secrity.util.SecurityUtils;
-import com.aaa.springsecurity.config.secrity.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,11 +30,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         LoginUser loginUser = tokenService.getLoginUser(request);
-        if (StringUtils.isNotNull(loginUser) && StringUtils.isNull(SecurityUtils.getAuthentication())) {
+        if (loginUser != null && SecurityUtils.getAuthentication() == null) {
             tokenService.verifyToken(loginUser);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        }
+        if (loginUser == null) {
+            SecurityContextHolder.getContext().setAuthentication(null);
         }
         chain.doFilter(request, response);
     }

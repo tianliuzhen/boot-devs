@@ -82,7 +82,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable(); // 基于 token，不需要 csrf
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);// 基于 token，不需要 session
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);// 基于 token，不需要 session
         // 下面开始设置权限
         http.authorizeRequests(authorize -> authorize
                 .antMatchers("/wx/login").permitAll() //不需要进行身份验证的接口
