@@ -1,6 +1,6 @@
-package com.aaa.shardingsphere.dal.mapper.single;
+package com.aaa.shardingsphere.dal.mapper.broadcast;
 
-import com.aaa.shardingsphere.model.entity.single.TAddressDO;
+import com.aaa.shardingsphere.model.entity.broadcast.TAddressDO;
 import tk.mybatis.mapper.common.BaseMapper;
 
 /**

@@ -1,0 +1,51 @@
+props:
+  sql-show: true
+
+dataSources:
+  ds_single:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3301/sharding-db_single?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+  ds_0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3301/sharding-db_0?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+  ds_1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    jdbcUrl: jdbc:mysql://localhost:3301/sharding-db_1?serverTimezone=UTC&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+
+# org.apache.shardingsphere.sharding.yaml.config.YamlShardingRuleConfiguration
+rules:
+  - !SHARDING
+    tables:
+      t_order:
+        actualDataNodes: ds_${0..1}.t_order_${0..1}
+        databaseStrategy:
+          hint: # HintShardingStrategyConfiguration
+            # shardingColumn: order_id #官网文档里面有，代码里面无此选项
+            shardingAlgorithmName: hint_class_based
+        tableStrategy:
+          hint:
+            # shardingColumn: order_id #官网文档里面有，代码里面无此选项
+            shardingAlgorithmName: hint_class_based
+    shardingAlgorithms:
+      hint_class_based:
+        type: CLASS_BASED
+        props:
+          strategy: HINT
+          algorithmClassName: com.aaa.shardingsphere.config.algorithm.MyHintShardingAlgorithm # 需实现 HintShardingAlgorithm
+    defaultTableStrategy:
+      none:
+    defaultKeyGenerateStrategy:
+      keyGeneratorName: snowflake_key
+      column: order_id
+    keyGenerators:
+      snowflake_key:
+        type: SNOWFLAKE
