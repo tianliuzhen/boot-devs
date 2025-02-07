@@ -1,0 +1,24 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>安全登录</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            margin: 10px auto;
+        }
+        .form-signin {
+            width: 50%; /* 根据需要调整宽度 */
+            margin: 0 auto;
+            padding: 20px; /* 可选，为表单添加内边距 */
+            border: 1px solid #ccc; /* 可选，为表单添加边框 */
+            border-radius: 6px; /* 可选，为表单边框添加圆角 */
+        }
+    </style>
+</head>
+<body>
+<form class="form-signin" th:action="@{/login}" method="post">
+    <h2 class="form-signin-heading">登录成功：successful</h2>
+</form>
+</body>
+</html>

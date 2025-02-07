@@ -1,0 +1,10 @@
+/logout 登出过滤器：
+org.springframework.security.web.authentication.logout.LogoutFilter.requiresLogout
+
+/login 页面渲染：
+org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse, jakarta.servlet.FilterChain)
+
+/login 接口响应：
+org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer.loginProcessingUrl
+org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.requiresAuthentication
+org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.attemptAuthentication
