@@ -26,10 +26,15 @@ public class SecurityConfig {
         //     registry.requestMatchers("/**").authenticated();
         // });
         http.formLogin(form -> {
-            form.loginPage("/loginHtml")  // 自定义登录页面
-                    .loginProcessingUrl("/doLogin")  // 自定义登录处理接口
-                    .successForwardUrl("/mySuccessForwardUrl") // 服务器端转发，地址栏不变，适合需要服务器端处理的场景 (只能是post)
-                    .defaultSuccessUrl("/myDefaultSuccessUrl") // 客户端重定向，地址栏更新，适合直接跳转页面的场景    (只能是get)
+            // 自定义登录页面
+            form.loginPage("/loginHtml")
+                    // 自定义登录处理接口
+                    .loginProcessingUrl("/doLogin")
+                    // 服务器端转发，地址栏不变，适合需要服务器端处理的场景 (只能是post，因为 /doLogin 默认是post) 详情可见：ForwardAuthenticationSuccessHandler.onAuthenticationSuccess
+                    .successForwardUrl("/mySuccessForwardUrl")
+                    // 客户端重定向，地址栏更新，适合直接跳转页面的场景    (只能是get) 详情可见：SavedRequestAwareAuthenticationSuccessHandler.onAuthenticationSuccess
+                    .defaultSuccessUrl("/myDefaultSuccessUrl") // 有先后顺序，后面会覆盖前面的
+
             ; // 登录成功展示页面
         });
         return http.build();
