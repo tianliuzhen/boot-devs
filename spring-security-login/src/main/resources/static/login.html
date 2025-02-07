@@ -28,7 +28,15 @@
         <label for="password" class="sr-only">密码</label>
         <input type="password" id="password" name="password" value="123456" class="form-control" placeholder="密码" required autofocus/>
     </p>
+
+
+    <p>
+        <label for="remember-me" class="sr-only">下次免登录:</label>
+        <input type="checkbox" id="remember-me" name="remember-me">
+    </p>
+
     <button class="btn btn-sm btn-primary btn-block" type="submit">登录</button>
+
     <a href="/index" th:href="@{/index}">返回</a>
 </form>
 </body>
