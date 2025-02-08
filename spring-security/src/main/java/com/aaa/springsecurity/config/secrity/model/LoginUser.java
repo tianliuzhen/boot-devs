@@ -50,9 +50,6 @@ public class LoginUser implements UserDetails {
     public LoginUser(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.permissions = new HashSet<String>() {{
-            add(PermissionService.ALL_PERMISSION);
-        }};
     }
 
     public LoginUser(String userName, String password, List<GrantedAuthority> authorities) {

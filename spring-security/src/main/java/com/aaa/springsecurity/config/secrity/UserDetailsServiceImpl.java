@@ -39,6 +39,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     authorityList);
         }
 
+        if ("tom".equals(username)) {
+            // tom-aaa111
+            return new LoginUser(
+                    username,
+                    "$2a$10$337Tzkon0f1Ar1CcYCA4F.pCwTn4p9nYWdkasHIGUdNW1kZI.4gv6");
+        }
+
+
         throw new UsernameNotFoundException("登录用户：" + username + " 不存在");
     }
 

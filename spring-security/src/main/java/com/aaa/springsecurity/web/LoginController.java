@@ -67,7 +67,7 @@ public class LoginController {
      *
      * @return
      */
-    @PostMapping("/updateById")
+    @RequestMapping("/updateById")
     @PreAuthorize("@ss.hasPermi('system:user:edit')")
     public AjaxResult updateById() {
         // if (true) {
