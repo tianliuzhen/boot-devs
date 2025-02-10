@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +28,21 @@ public class LoginController {
 
     @GetMapping(value = "/myDefaultSuccessUrl")
     public String successful(HttpSession session){
+        System.out.println("myDefaultSuccessUrl...");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return "successful";
+    }
+
+    @PostMapping(value = "/setHello")
+    @ResponseBody
+    public String setHello(){
+        return "setHello";
+    }
+
+
+    @GetMapping(value = "/getHello")
+    @ResponseBody
+    public String getHello(){
+        return "getHello";
     }
 }
